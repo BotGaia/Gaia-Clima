@@ -1,0 +1,25 @@
+version: '2'
+
+services:
+  app:
+    image: caleberios/wendy_node:latest
+    restart: always
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - 3000:3000
+    command: npm run dev
+    depends_on:
+      - mongo
+  
+  mongo:
+    image: bitnami/mongodb:latest
+    ports: 
+      - 27017:27017
+    environment:
+      - MONGODB_ROOT_PASSWORD=password123
+    labels:
+      kompose.service.type: nodeport
+    volumes:
+      - .mongodb_data:/data/db
