@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/wendybot/Wendy-Clima.svg?branch=dev)](https://travis-ci.org/wendybot/Wendy-Clima)
+
 # Wendy-Clima
 
 ## Objetivo
@@ -13,6 +15,10 @@ Primeiro tem que instalar o docker, em seguida rode o projeto como desenvolvimen
 Após o build, rode esse outro comando:
 
 ```$ docker run --rm -it -p 3000:3000 -v $PWD:/app -v /app/node_modules wendyclima```
+
+Para rodar os testes, rode esse comando:
+
+```$ docker run --rm -it -p 3000:3000 -v $PWD:/app -v /app/node_modules wendyclima /bin/sh -c "cd /app; npm test"```
 
 ### Endpoints
 
