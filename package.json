@@ -6,7 +6,8 @@
   "scripts": {
     "test": "mocha src/test --exit",
     "dev": "nodemon src/index.js",
-    "start": "node src/index.js"
+    "start": "node src/index.js",
+    "lint": "npx eslint ."
   },
   "keywords": [],
   "author": "",

@@ -24,6 +24,10 @@ Para rodar os testes, rode esse comando:
 
 ```$ docker run --rm -it -p 3000:3000 -v $PWD:/app -v /app/node_modules wendyclima /bin/sh -c "cd /app; npm test"```
 
+Para rodar a folha de estilo, utilize este comando:
+
+```$ docker run --rm -it -p 3000:3000 -v $PWD:/app -v /app/node_modules wendyclima /bin/sh -c "cd /app; npm run lint"```
+
 ### Endpoints
 
 Aqui se encontra todas as endpoints desse serviço.
