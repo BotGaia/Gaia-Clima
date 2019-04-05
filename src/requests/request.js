@@ -3,7 +3,7 @@ const express = require('express');
 
 const router = express.Router();
 
-router.get('/request/', async (req, res) => {
+router.get('/request', async (req, res) => {
   //  const lat = req.params.lati
   const { query: { lati: lat } } = req;
   //  const lat = req.params.long
