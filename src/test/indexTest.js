@@ -11,7 +11,7 @@ chai.use(chaiHttp);
 
 describe('GET weather', () => {
   it('should get a weather object', (done) => {
-    chai.request(app).get('/request/22/25').end((err, res) => {
+    chai.request(app).get('/request/?lati=22&long=25').end((err, res) => {
       res.should.have.status(200);
       res.body.should.be.a('Object');
       done();
