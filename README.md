@@ -18,15 +18,15 @@ Primeiro tem que instalar o docker, em seguida rode o projeto como desenvolvimen
 
 Após o build, rode esse outro comando:
 
-```$ docker run --rm -it -p 3000:3000 -v $PWD:/app -v /app/node_modules wendyclima```
+```$ docker run --env-file ./app-env --rm -it -p 3000:3000 -v $PWD:/app -v /app/node_modules wendyclima```
 
 Para rodar os testes, rode esse comando:
 
-```$ docker run --rm -it -p 3000:3000 -v $PWD:/app -v /app/node_modules wendyclima /bin/sh -c "cd /app; npm test"```
+```$ docker run --env-file ./app-env --rm -it -p 3000:3000 -v $PWD:/app -v /app/node_modules wendyclima /bin/sh -c "cd /app; npm test"```
 
 Para rodar a folha de estilo, utilize este comando:
 
-```$ docker run --rm -it -p 3000:3000 -v $PWD:/app -v /app/node_modules wendyclima /bin/sh -c "cd /app; npm run lint"```
+```$ docker run --env-file ./app-env --rm -it -p 3000:3000 -v $PWD:/app -v /app/node_modules wendyclima /bin/sh -c "cd /app; npm run lint"```
 
 ### Endpoints
 

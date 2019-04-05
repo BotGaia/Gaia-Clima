@@ -8,15 +8,18 @@ const https = require('https');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.get('/request/:lati/:long', (req, res) => {
+app.get('/request/', (req, res) => {
   //  const lat = req.params.lati
-  const { params: { lati: lat } } = req;
+  const { query: { lati: lat } } = req;
   //  const lat = req.params.long
-  const { params: { long: lon } } = req;
+  const { query: { long: lon } } = req;
   let data = '';
   let JsonData = '';
+  let apiKey = process.env.API_KEY;
+  
+  console.log(apiKey);
 
-  https.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=652aee6b1beb9ead3681837980b21671`, (resp) => {
+  https.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`, (resp) => {
     resp.on('data', (chunk) => {
       data += chunk;
     });
