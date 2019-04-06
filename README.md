@@ -10,10 +10,6 @@
 Esse serviço é responsável por pegar o clima de um determinado local, referenciado pela longitude e latitude, da API [OpenWeatherMap](https://openweathermap.org).
 
 ## Como usar
-Para realizar a request das informações de uma latitude e longitude, utilize query da seguinte forma:
-
-> localhost:3000/request?lati={VALOR_SEM_CHAVES}&long={VALOR_SEM_CHAVES}
-
 
 ### Como rodar
 Primeiro tem que instalar o docker, em seguida rode o projeto como desenvolvimento da seguinte maneira:
@@ -33,8 +29,14 @@ Para rodar a folha de estilo, utilize este comando:
 ```$ docker run --rm -it -p 3000:3000 -v $PWD:/app -v /app/node_modules wendyclima /bin/sh -c "cd /app; npm run lint"```
 
 ### Endpoints
-
-Aqui se encontra todas as endpoints desse serviço:
-
-Para fazer requisiação à API OpenWeatherMap
-> localhost:3000/request
+<table>
+	<tr>
+		<td>GET</td>
+		<td>localhost:3000/request?lati={VALOR}&long={VALOR}</td>
+		<td>lati</td>
+		<td>float</td>
+		<td>long</td>
+		<td>float</td>
+		<td>Recebe informação a respeito do clima nas coordenadas informadas</td>
+	</tr>
+</table>

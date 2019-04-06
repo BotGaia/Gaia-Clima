@@ -18,6 +18,7 @@ describe('GET weather', () => {
     });
   });
 });
+
 describe('Wrong parameters', () => {
   it('should return a 400 error', (done) => {
     chai.request(app).get('/request?lati=22&long=RUSBÉ').end((err, res) => {
@@ -38,6 +39,7 @@ describe('Missing parameters', () => {
     });
   });
 });
+
 describe('Unexisting coordinates', () => {
   it('should return a 400 error', (done) => {
     chai.request(app).get('/request?lati=-92&long=182').end((err, res) => {
