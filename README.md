@@ -18,11 +18,11 @@ Primeiro tem que instalar o docker, em seguida rode o projeto como desenvolvimen
 
 Após o build, rode esse outro comando:
 
-```$ docker run --env-file ./app-env --rm -it -p 3000:3000 -v $PWD:/app -v /app/node_modules wendyclima```
+```$ docker run --env-file ./app-env --rm -it --network="host" -p 3000:3000 -v $PWD:/app -v /app/node_modules wendyclima```
 
 Para rodar os testes, rode esse comando:
 
-```$ docker run --env-file ./app-env --rm -it -p 3000:3000 -v $PWD:/app -v /app/node_modules wendyclima /bin/sh -c "cd /app; npm test"```
+```$ docker run --env-file ./app-env --rm -it --network="host" -p 3000:3000 -v $PWD:/app -v /app/node_modules wendyclima /bin/sh -c "cd /app; npm test"```
 
 Para rodar a folha de estilo, utilize este comando:
 
@@ -32,11 +32,10 @@ Para rodar a folha de estilo, utilize este comando:
 <table>
 	<tr>
 		<td>GET</td>
-		<td>localhost:3000/request?lati={VALOR}&long={VALOR}</td>
-		<td>lati</td>
-		<td>float</td>
-		<td>long</td>
-		<td>float</td>
-		<td>Recebe informação a respeito do clima nas coordenadas informadas</td>
+		<td>localhost:3000/request?place={VALOR}</td>
+		<td>place</td>
+		<td>string</td>
+		<td>Recebe informação a respeito do clima do local informado</td>
 	</tr>
+	
 </table>
