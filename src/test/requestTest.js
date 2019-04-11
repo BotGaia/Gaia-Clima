@@ -10,43 +10,39 @@ const should = chai.should();
 chai.use(chaiHttp);
 
 describe('GET weather', () => {
-  it('should get a weather object', (done) => {
-    chai.request(app).get('/request?lati=22&long=25').end((err, res) => {
+  it('should get a weather object', () => {
+    chai.request(app).get('/request?place=brasilia').end((err, res) => {
       res.should.have.status(200);
       res.body.should.be.a('Object');
-      done();
     });
   });
 });
 
 describe('Wrong parameters', () => {
-  it('should return a 400 error', (done) => {
-    chai.request(app).get('/request?lati=22&long=RUSBÉ').end((err, res) => {
+  it('should return a 400 error', () => {
+    chai.request(app).get('/request?ze=RUSBÉ').end((err, res) => {
       res.should.have.status(200);
       res.body.should.be.a('Object');
       res.body.should.have.property('cod').eql('400');
-      done();
     });
   });
 });
 describe('Missing parameters', () => {
-  it('should return a 400 error', (done) => {
-    chai.request(app).get('/request?lati=22').end((err, res) => {
+  it('should return a 400 error', () => {
+    chai.request(app).get('/request?').end((err, res) => {
       res.should.have.status(200);
       res.body.should.be.a('Object');
       res.body.should.have.property('cod').eql('400');
-      done();
     });
   });
 });
 
-describe('Unexisting coordinates', () => {
-  it('should return a 400 error', (done) => {
-    chai.request(app).get('/request?lati=-92&long=182').end((err, res) => {
+describe('Invalid character', () => {
+  it('should return a 400 error', () => {
+    chai.request(app).get('/request?place=bra silia').end((err, res) => {
       res.should.have.status(200);
       res.body.should.be.a('Object');
       res.body.should.have.property('cod').eql('400');
-      done();
     });
   });
 });
