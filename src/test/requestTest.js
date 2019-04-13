@@ -11,7 +11,7 @@ chai.use(chaiHttp);
 
 describe('GET weather', () => {
   it('should get a weather object', () => {
-    chai.request(app).get('/request?place=brasilia').end((err, res) => {
+    chai.request(app).get('/simulation?place=brasilia').end((err, res) => {
       res.should.have.status(200);
       res.body.should.be.a('Object');
     });
@@ -20,7 +20,7 @@ describe('GET weather', () => {
 
 describe('Wrong parameters', () => {
   it('should return a 400 error', () => {
-    chai.request(app).get('/request?ze=RUSBÉ').end((err, res) => {
+    chai.request(app).get('/simulation?ze=RUSBÉ').end((err, res) => {
       res.should.have.status(200);
       res.body.should.be.a('Object');
       res.body.should.have.property('cod').eql('400');
@@ -29,7 +29,7 @@ describe('Wrong parameters', () => {
 });
 describe('Missing parameters', () => {
   it('should return a 400 error', () => {
-    chai.request(app).get('/request?').end((err, res) => {
+    chai.request(app).get('/simulation?').end((err, res) => {
       res.should.have.status(200);
       res.body.should.be.a('Object');
       res.body.should.have.property('cod').eql('400');
@@ -39,7 +39,7 @@ describe('Missing parameters', () => {
 
 describe('Invalid character', () => {
   it('should return a 400 error', () => {
-    chai.request(app).get('/request?place=bra silia').end((err, res) => {
+    chai.request(app).get('/simulation?place=bra silia').end((err, res) => {
       res.should.have.status(200);
       res.body.should.be.a('Object');
       res.body.should.have.property('cod').eql('400');
