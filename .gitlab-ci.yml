@@ -1,0 +1,24 @@
+image: docker:latest
+
+services:
+  - docker:dind
+
+stages:
+  - build
+  - test
+  - quality
+
+buildLocal:
+  stage: build
+  script:
+    - docker build --rm -t gaiaclima . 
+
+testCheck:
+  stage: test
+  script:
+    - docker run --rm -it -p 3000:3000 -v $PWD:/app -v /app/node_modules gaiaclima /bin/sh -c "cd /app; npm test"
+
+staticAnalysis:
+  stage: quality
+  script:
+    - docker run --rm -it -p 3000:3000 -v $PWD:/app -v /app/node_modules gaiaclima /bin/sh -c "cd /app; npm run lint"
