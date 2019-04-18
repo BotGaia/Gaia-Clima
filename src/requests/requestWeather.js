@@ -7,9 +7,31 @@ const weather = new Weather();
 function jsonDataToWeather(JsonData, weather) {
 
   try {
-    weather.setPressure(JsonData.cod);
+    weather.setName(JsonData.name);
+    weather.setWeather(JsonData.weather[0].description);
+    weather.setTemperature(JsonData.main.temp);
+    weather.setPressure(JsonData.main.pressure);
+    weather.setHumidity(JsonData.main.humidity);
+    weather.setTemperatureMin(JsonData.main.temp_min);
+    weather.setTemperaturaMax(JsonData.main.temp_max);
+    weather.setSeaLevel(JsonData.main.sea_level);
+    weather.setWindySpeed(JsonData.wind.speed);
+    weather.setWindyDegrees(JsonData.wind.deg);
+    weather.setSunrise(JsonData.sys.sunrise);
+    weather.setSunset(JsonData.sys.sunset);
   } catch (error) {
+    weather.setName('error');
+    weather.setWeather('error');
+    weather.setTemperature('error');
     weather.setPressure('error');
+    weather.setHumidity('error');
+    weather.setTemperatureMin('error');
+    weather.setTemperaturaMax('error');
+    weather.setSeaLevel('error');
+    weather.setWindySpeed('error');
+    weather.setWindyDegrees('error');
+    weather.setSunrise('error');
+    weather.setSunset('error');
   }
 }
 
@@ -30,7 +52,6 @@ router.get('/request', async (req, res) => {
     resp.on('end', () => {
       JsonData = JSON.parse(data);
       jsonDataToWeather(JsonData, weather);
-      console.log(weather.getPressure());
       res.json(JsonData);
     });
  });
