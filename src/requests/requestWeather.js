@@ -1,15 +1,15 @@
 const https = require('https');
 const express = require('express');
-const Weather = require('../models/Weather');
+const Weather = require('../models/Weather.js');
 
-const weather = new Weather();
+const weather = new Weather(); 
 
 function jsonDataToWeather(JsonData, weather) {
-  try {
-    weather.setName(JsonData.name);
 
+  try {
+    weather.setPressure(JsonData.cod);
   } catch (error) {
-    weather.setName('error');
+    weather.setPressure('error');
   }
 }
 
@@ -29,9 +29,10 @@ router.get('/request', async (req, res) => {
 
     resp.on('end', () => {
       JsonData = JSON.parse(data);
-      jsonDataToWeather(JsonData,weather);
+      jsonDataToWeather(JsonData, weather);
+      console.log(weather.getPressure());
       res.json(JsonData);
     });
-  });
+ });
 });
 module.exports = app => app.use('/', router);

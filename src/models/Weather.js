@@ -1,20 +1,6 @@
 module.exports = class Weather {
-    constructor(name,weather,temperature,pressure,humidity,temperatureMin,temperatureMax,seaLevel,windSpeed,windDegress,windDirection,rain,sunrise,sunset){
+    constructor(name){
         this.name = name;
-        this.weather = weather;
-        this.temperature = temperature;
-        this.pressure = pressure;
-        this.humidity = humidity;
-        this.temperatureMin = temperatureMin;
-        this.temperatureMax = temperatureMax;
-        this.seaLevel = seaLevel;
-        this.windSpeed = windSpeed;
-        this.windDegress = windDegress;
-        this.windDirection = windDirection;
-        this.rain = rain;
-        this.sunrise = sunrise;
-        this.sunset = sunset;
-
     }
 
 setName(name) {
