@@ -11,12 +11,12 @@ getName() {
     return this.name;
 }
 
-setweather(weather) {
-    this.weather = weather;
+setSky(sky) {
+    this.sky = sky;
 }
 
-getWeather() {
-    return this.weather;
+getSky() {
+    return this.sky;
 }
 
 setTemperature(temperature) {
@@ -47,7 +47,7 @@ setTemperatureMin(temperatureMin) {
     this.temperatureMin = temperatureMin;
 }
 
-getTemperatureMin(temperatureMin) {
+getTemperatureMin() {
     return this.temperatureMin;
 }
 
@@ -67,8 +67,8 @@ getSeaLevel() {
     return this.seaLevel;
 }
 
-setWindySpeed() {
-    this.windSpeed = windySpeed;
+setWindySpeed(windySpeed) {
+    this.windySpeed = windySpeed;
 }
 
 getWindySpeed() {
@@ -80,15 +80,7 @@ setWindyDegrees(windyDegrees) {
 }
 
 getWindyDegrees() {
-    return this.windDegress;
-}
-
-setWindyDirection(windDirection) {
-    this.windyDirection = windyDirection;
-}
-
-getWindyDirection() {
-    return this.windyDirection;
+    return this.windyDegress;
 }
 
 setRain(rain) {
@@ -100,7 +92,7 @@ getRain() {
 }
 
 setSunrise(sunrise) {
-    this.sunrise = sunshine;
+    this.sunrise = sunrise;
 }
 
 getSunrise() {
