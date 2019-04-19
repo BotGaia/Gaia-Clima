@@ -1,8 +1,9 @@
 const https = require('https');
 const express = require('express');
 const Weather = require('../models/Weather.js');
+const Treatment = require("../models/treatmentWeather.js");
 
-const weather = new Weather(); 
+const weather = new Weather();
 
 function jsonDataToWeather(JsonData, weather) {
 
@@ -22,8 +23,38 @@ function jsonDataToWeather(JsonData, weather) {
 function treatSky(JsonData, weather) {
   try {
     weather.setSky(JsonData.weather[0].description);
+    if(weather.getSky() == 'clear sky'){
+      weather.setSky('céu limpo');
+    }
+    if(weather.getSky() == 'few clouds'){
+      weather.setSky('poucas nuvens');
+    }
+    if(weather.getSky() == 'broken clouds'){
+      weather.setSky('céu parcialmente nublado');
+    }
+    if(weather.getSky() == 'scattered clouds'){
+      weather.setSky('nuvens dispersas');
+    }
+    if(weather.getSky() == 'moderate rain'){
+      weather.setSky('chuva moderada');
+    }
+    if(weather.getSky() == 'light rain'){
+      weather.setSky('leve chuva');
+    }
+    if(weather.getSky() == 'overcast clouds'){
+      weather.setSky('céu nublado');
+    }
+    if(weather.getSky() == 'light intensity'){
+      weather.setSky('sol forte');
+    }
+    if(weather.getSky() == 'shower rain'){
+      weather.setSky('chuva intensa');
+    }
+    if(weather.getSky() == 'heavy snow'){
+      weather.setSky('neve intensa');
+    }
   } catch (error) {
-    weather.setWeather('error');
+    weather.setSky('error');
   }
 }
 
@@ -32,6 +63,10 @@ function treatTemperature(JsonData, weather) {
     weather.setTemperature(JsonData.main.temp);
     weather.setTemperatureMin(JsonData.main.temp_min);
     weather.setTemperatureMax(JsonData.main.temp_max);
+  
+    far = parseFloat(weather.getTemperature());
+    farMax = parseFloat(weather.getTemperatureMax());
+    farMin = parseFloat(weather.getTemperatureMin());
   } catch (error) {
     weather.setTemperature('error');
     weather.setTemperatureMin('error');
@@ -90,9 +125,13 @@ router.get('/request', async (req, res) => {
       treatPressure(JsonData, weather);
       treatWind(JsonData, weather);
       treatSun(JsonData, weather);
-
+      console.log(weather.getSky());
+      console.log(farMax);
+      console.log(farMin);
+;
       res.json(JsonData);
     });
- });
+
+ });    
 });
 module.exports = app => app.use('/', router);
