@@ -133,7 +133,15 @@ function treatWind(JsonData, weather) {
 function treatSun(JsonData, weather) {
   try {
     weather.setSunrise(JsonData.sys.sunrise);
-    weather.setSunset(JsonData.sys.sunset); 
+    weather.setSunset(JsonData.sys.sunset);
+
+    sunr = parseInt(weather.getSunrise());
+    suns = parseInt(weather.getSunset());
+
+    sr = new Date(sunr).toLocaleTimeString("pt-BR");
+    ss = new Date(suns).toLocaleTimeString("pt-BR");
+    weather.setSunset(ss.toString());
+    weather.setSunrise(sr.toString());
   } catch (error) {
     weather.setSunrise('error');
     weather.setSunset('error');
@@ -162,9 +170,10 @@ router.get('/request', async (req, res) => {
       treatPressure(JsonData, weather);
       treatWind(JsonData, weather);
       treatSun(JsonData, weather);
-      console.log(weather.getSky());
-      console.log(weather.getWindyDegrees());
-
+      console.log(ss);
+      console.log(weather.getSunrise());
+      console.log(weather.getSunset());
+      
 ;
       res.json(JsonData);
     });

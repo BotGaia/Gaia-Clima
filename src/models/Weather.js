@@ -80,7 +80,7 @@ setWindyDegrees(windyDegrees) {
 }
 
 getWindyDegrees() {
-    return this.windyDegress;
+    return this.windyDegrees;
 }
 
 setRain(rain) {
