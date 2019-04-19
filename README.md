@@ -1,9 +1,7 @@
 
-[![Build Status](https://travis-ci.org/wendybot/Wendy-Clima.svg?branch=dev)](https://travis-ci.org/wendybot/Wendy-Clima)
+[![pipeline status](https://gitlab.com/botgaia/Gaia-Clima/badges/master/pipeline.svg)](https://gitlab.com/botgaia/Gaia-Clima/commits/master)
+[![coverage report](https://gitlab.com/botgaia/Gaia-Clima/badges/master/coverage.svg)](https://gitlab.com/botgaia/Gaia-Clima/commits/master)
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/68981c0a1fe08635480b/maintainability)](https://codeclimate.com/github/wendybot/Wendy-Clima/maintainability)
-
-[![Test Coverage](https://api.codeclimate.com/v1/badges/68981c0a1fe08635480b/test_coverage)](https://codeclimate.com/github/wendybot/Wendy-Clima/test_coverage)
 
 # Gaia-Clima
 
