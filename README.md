@@ -1,9 +1,5 @@
-
-[![Build Status](https://travis-ci.org/wendybot/Wendy-Clima.svg?branch=dev)](https://travis-ci.org/wendybot/Wendy-Clima)
-
-[![Maintainability](https://api.codeclimate.com/v1/badges/68981c0a1fe08635480b/maintainability)](https://codeclimate.com/github/wendybot/Wendy-Clima/maintainability)
-
-[![Test Coverage](https://api.codeclimate.com/v1/badges/68981c0a1fe08635480b/test_coverage)](https://codeclimate.com/github/wendybot/Wendy-Clima/test_coverage)
+[![pipeline status](https://gitlab.com/botgaia/Gaia-Clima/badges/master/pipeline.svg)](https://gitlab.com/botgaia/Gaia-Clima/commits/master)
+[![coverage report](https://gitlab.com/botgaia/Gaia-Clima/badges/master/coverage.svg)](https://gitlab.com/botgaia/Gaia-Clima/commits/master)
 
 # Wendy-Clima
 
@@ -34,15 +30,15 @@ E pegue o endereço de IP indicado no campo `Endereço IPv4`.
 
 Primeiro tem que instalar o docker, em seguida rode o projeto como desenvolvimento da seguinte maneira:
 
-```$ sudo docker build --rm -t wendyclima .```
+```$ sudo docker build --rm -t gaiaclima```
 
 Após o build, rode esse outro comando:
 
-```$ sudo docker run --env-file ./.env --rm -it -p 3000:3000 -v $PWD:/app -v /app/node_modules wendyclima```
+```$ sudo docker run --env-file ./app-env --rm -it -p 3000:3000 -v $PWD:/app -v /app/node_modules wendyclima```
 
 Para rodar os testes, rode esse comando:
 
-```$ sudo docker run --env-file ./.env --rm -it -p 3000:3000 -v $PWD:/app -v /app/node_modules wendyclima /bin/sh -c "cd /app; npm test"```
+```$ sudo docker run --env-file ./app-env --rm -it -p 3000:3000 -v $PWD:/app -v /app/node_modules wendyclima /bin/sh -c "cd /app; npm test"```
 
 Para rodar a folha de estilo, utilize este comando:
 

@@ -3,6 +3,9 @@ image: docker:latest
 services:
   - docker:dind
 
+before_script:
+  - docker build --rm -t gaiaclima . --build-arg IP_ADDRESS="$(chmod 755 ip-get ; ./ip-get)"
+
 stages:
   - build
   - test
@@ -11,14 +14,15 @@ stages:
 buildLocal:
   stage: build
   script:
-    - docker build --rm -t gaiaclima . 
+    - docker build --rm -t gaiaclima . --build-arg IP_ADDRESS="$(chmod 755 ip-get ; ./ip-get)"
 
 testCheck:
   stage: test
   script:
-    - docker run --rm -it -p 3000:3000 -v $PWD:/app -v /app/node_modules gaiaclima /bin/sh -c "cd /app; npm test"
+    - docker run --rm -p 3000:3000 -v $PWD:/app -v /app/node_modules gaiaclima /bin/sh -c "cd /app; npm test"
 
 staticAnalysis:
   stage: quality
   script:
-    - docker run --rm -it -p 3000:3000 -v $PWD:/app -v /app/node_modules gaiaclima /bin/sh -c "cd /app; npm run lint"
+    - docker run --rm -p 3000:3000 -v $PWD:/app -v /app/node_modules gaiaclima /bin/sh -c "cd /app; npm run lint"
+    
