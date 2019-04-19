@@ -31,7 +31,7 @@ describe('Invalid or missing parameter', () => {
       weatherJson.should.have.property('cod').eql('400');
       done();
     });
-  });
+  }).timeout(5000);
 });
 
 describe('Unexisting location', () => {
@@ -43,5 +43,5 @@ describe('Unexisting location', () => {
       weatherJson.should.have.property('cod').eql('400');
       done();
     });
-  });
+  }).timeout(5000);
 });
