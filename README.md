@@ -11,7 +11,7 @@ Esse serviço é responsável por pegar o clima de um determinado local, referen
 ### Como rodar
 Primeiro tem que instalar o docker, em seguida rode o projeto como desenvolvimento da seguinte maneira:
 
-```$ docker build --rm -t gaiaclima . --build-arg IP_ADDRESS="$(chmod 755 ip-get ; ./ip-get)"```
+```$ sudo docker build --rm -t gaiaclima . --build-arg IP_ADDRESS="$(chmod 755 ip-get ; ./ip-get)"```
 
 Após o build, rode esse outro comando:
 
@@ -19,11 +19,11 @@ Após o build, rode esse outro comando:
 
 Para rodar os testes, rode esse comando:
 
-```$ docker run --env-file ./app-env --rm -it -p 3000:3000 -v $PWD:/app -v /app/node_modules wendyclima /bin/sh -c "cd /app; npm test"```
+```$ sudo docker run --env-file ./app-env --rm -it -p 3000:3000 -v $PWD:/app -v /app/node_modules wendyclima /bin/sh -c "cd /app; npm test"```
 
 Para rodar a folha de estilo, utilize este comando:
 
-```$ docker run --rm -it -p 3000:3000 -v $PWD:/app -v /app/node_modules wendyclima /bin/sh -c "cd /app; npm run lint"```
+```$ sudo docker run --rm -it -p 3000:3000 -v $PWD:/app -v /app/node_modules wendyclima /bin/sh -c "cd /app; npm run lint"```
 
 ### Endpoints
 <table>
