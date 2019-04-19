@@ -5,13 +5,10 @@ const Weather = require('../models/Weather.js');
 const weather = new Weather();
 
 function jsonDataToWeather(JsonData, weather) {
-
   try {
     weather.setName(JsonData.name);
     weather.setHumidity(JsonData.main.humidity);
     weather.setSeaLevel(JsonData.main.sea_level);
-
-
   } catch (error) {
     weather.setName('error');
     weather.setHumidity('error');
@@ -77,10 +74,9 @@ function treatTemperature(JsonData, weather) {
   } catch (error) {
     weather.setTemperature('error');
     weather.setTemperatureMin('error');
-    weather.setTemperatureMax('error'); 
+    weather.setTemperatureMax('error');
   }
 }
-
 function treatPressure(JsonData, weather) {
   try {
     weather.setPressure(JsonData.main.pressure);
@@ -98,7 +94,7 @@ function treatWind(JsonData, weather) {
     weather.setWindyDegrees(JsonData.wind.deg);
 
     const ang = parseFloat(weather.getWindyDegrees());
-    if (ang >= 337.5 && ang < 22.5){
+    if (ang >= 337.5 && ang < 22.5) {
       weather.setWindyDegrees('leste');
     }
     if (ang >= 22.5 && ang < 67.5) {
@@ -122,7 +118,6 @@ function treatWind(JsonData, weather) {
     if (ang >= 292.5 && ang < 337.5) {
       weather.setWindyDegrees('sudeste');
     }
-
   } catch (error) {
     weather.setWindySpeed('error');
     weather.setWindyDegrees('error');

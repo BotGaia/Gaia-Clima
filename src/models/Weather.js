@@ -1,5 +1,5 @@
 module.exports = class Weather {
-  constructor(name){
+  constructor(name) {
     this.name = name;
   }
 
@@ -98,4 +98,4 @@ module.exports = class Weather {
   getSunset() {
     return this.sunset;
   }
-}
+};
