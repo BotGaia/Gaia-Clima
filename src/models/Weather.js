@@ -1,109 +1,101 @@
 module.exports = class Weather {
-    constructor(name){
-        this.name = name;
-    }
-
-setName(name) {
+  constructor(name){
     this.name = name;
   }
 
-getName() {
+  setName(name) {
+    this.name = name;
+  }
+
+  getName() {
     return this.name;
-}
+  }
 
-setSky(sky) {
+  setSky(sky) {
     this.sky = sky;
-}
+  }
 
-getSky() {
+  getSky() {
     return this.sky;
-}
+  }
 
-setTemperature(temperature) {
+  setTemperature(temperature) {
     this.temperature = temperature;
-}
+  }
 
-getTemperature() {
+  getTemperature() {
     return this.temperature;
-}
+  }
 
-setPressure(pressure) {
+  setPressure(pressure) {
     this.pressure = pressure;
-}
+  }
 
-getPressure() {
+  getPressure() {
     return this.pressure;
-}
+  }
 
-setHumidity(humidity) {
+  setHumidity(humidity) {
     this.humidity = humidity;
-}
+  }
 
-getHumidity() {
+  getHumidity() {
     return this.humidity;
-}
+  }
 
-setTemperatureMin(temperatureMin) {
+  setTemperatureMin(temperatureMin) {
     this.temperatureMin = temperatureMin;
-}
+  }
 
-getTemperatureMin() {
+  getTemperatureMin() {
     return this.temperatureMin;
-}
+  }
 
-setTemperatureMax(temperatureMax) {
+  setTemperatureMax(temperatureMax) {
     this.temperatureMax = temperatureMax;
-}
+  }
 
-getTemperatureMax() {
+  getTemperatureMax() {
     return this.temperatureMax;
-}
+  }
 
-setSeaLevel(seaLevel) {
+  setSeaLevel(seaLevel) {
     this.seaLevel = seaLevel;
-}
+  }
 
-getSeaLevel() {
+  getSeaLevel() {
     return this.seaLevel;
-}
+  }
 
-setWindySpeed(windySpeed) {
+  setWindySpeed(windySpeed) {
     this.windySpeed = windySpeed;
-}
+  }
 
-getWindySpeed() {
+  getWindySpeed() {
     return this.windySpeed;
-}
+  }
 
-setWindyDegrees(windyDegrees) {
+  setWindyDegrees(windyDegrees) {
     this.windyDegrees = windyDegrees;
-}
+  }
 
-getWindyDegrees() {
+  getWindyDegrees() {
     return this.windyDegrees;
-}
+  }
 
-setRain(rain) {
-    this.rain = rain;
-}
-
-getRain() {
-    return this.rain;
-}
-
-setSunrise(sunrise) {
+  setSunrise(sunrise) {
     this.sunrise = sunrise;
-}
+  }
 
-getSunrise() {
+  getSunrise() {
     return this.sunrise;
-}
+  }
 
-setSunset(sunset) {
+  setSunset(sunset) {
     this.sunset = sunset;
-}
+  }
 
-getSunset() {
+  getSunset() {
     return this.sunset;
-}
+  }
 }
