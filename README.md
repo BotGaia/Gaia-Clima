@@ -1,7 +1,11 @@
-[![pipeline status](https://gitlab.com/botgaia/Gaia-Clima/badges/master/pipeline.svg)](https://gitlab.com/botgaia/Gaia-Clima/commits/master)
-[![coverage report](https://gitlab.com/botgaia/Gaia-Clima/badges/master/coverage.svg)](https://gitlab.com/botgaia/Gaia-Clima/commits/master)
 
-# Wendy-Clima
+[![Build Status](https://travis-ci.org/wendybot/Wendy-Clima.svg?branch=dev)](https://travis-ci.org/wendybot/Wendy-Clima)
+
+[![Maintainability](https://api.codeclimate.com/v1/badges/68981c0a1fe08635480b/maintainability)](https://codeclimate.com/github/wendybot/Wendy-Clima/maintainability)
+
+[![Test Coverage](https://api.codeclimate.com/v1/badges/68981c0a1fe08635480b/test_coverage)](https://codeclimate.com/github/wendybot/Wendy-Clima/test_coverage)
+
+# Gaia-Clima
 
 ## Objetivo
 Esse serviço é responsável por pegar o clima de um determinado local, referenciado pela longitude e latitude, da API [OpenWeatherMap](https://openweathermap.org).
@@ -30,19 +34,19 @@ E pegue o endereço de IP indicado no campo `Endereço IPv4`.
 
 Primeiro tem que instalar o docker, em seguida rode o projeto como desenvolvimento da seguinte maneira:
 
-```$ sudo docker build --rm -t gaiaclima```
+```$ sudo docker build --rm -t gaiaclima .```
 
 Após o build, rode esse outro comando:
 
-```$ sudo docker run --env-file ./app-env --rm -it -p 3000:3000 -v $PWD:/app -v /app/node_modules wendyclima```
+```$ sudo docker run --env-file ./.env --rm -it -p 3000:3000 -v $PWD:/app -v /app/node_modules gaiaclima```
 
 Para rodar os testes, rode esse comando:
 
-```$ sudo docker run --env-file ./app-env --rm -it -p 3000:3000 -v $PWD:/app -v /app/node_modules wendyclima /bin/sh -c "cd /app; npm test"```
+```$ sudo docker run --env-file ./.env --rm -it -p 3000:3000 -v $PWD:/app -v /app/node_modules gaiaclima /bin/sh -c "cd /app; npm test"```
 
 Para rodar a folha de estilo, utilize este comando:
 
-```$ sudo docker run --rm -it -p 3000:3000 -v $PWD:/app -v /app/node_modules wendyclima /bin/sh -c "cd /app; npm run lint"```
+```$ sudo docker run --rm -it -p 3000:3000 -v $PWD:/app -v /app/node_modules gaiaclima /bin/sh -c "cd /app; npm run lint"```
 
 ### Endpoints
 <table>
