@@ -3,6 +3,9 @@ image: docker:latest
 services:
   - docker:dind
 
+before_script:
+  - docker build --rm -t gaiaclima .
+
 stages:
   - build
   - test
@@ -11,7 +14,7 @@ stages:
 buildLocal:
   stage: build
   script:
-    - docker build --rm -t gaiaclima . 
+    - docker build --rm -t gaiaclima .
 
 testCheck:
   stage: test
