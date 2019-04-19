@@ -4,7 +4,7 @@ const Weather = require('../models/Weather.js');
 
 const weather = new Weather();
 
-function jsonDataToWeather(JsonData, weather) {
+function jsonDataToWeather(JsonData) {
   try {
     weather.setName(JsonData.name);
     weather.setHumidity(JsonData.main.humidity);
@@ -16,7 +16,7 @@ function jsonDataToWeather(JsonData, weather) {
   }
 }
 
-function treatSky(JsonData, weather) {
+function treatSky(JsonData) {
   try {
     weather.setSky(JsonData.weather[0].description);
     if (weather.getSky() === 'clear sky') {
@@ -54,7 +54,7 @@ function treatSky(JsonData, weather) {
   }
 }
 
-function treatTemperature(JsonData, weather) {
+function treatTemperature(JsonData) {
   try {
     weather.setTemperature(JsonData.main.temp);
     weather.setTemperatureMin(JsonData.main.temp_min);
@@ -77,7 +77,7 @@ function treatTemperature(JsonData, weather) {
     weather.setTemperatureMax('error');
   }
 }
-function treatPressure(JsonData, weather) {
+function treatPressure(JsonData) {
   try {
     weather.setPressure(JsonData.main.pressure);
     const hpa = parseFloat(weather.getPressure());
@@ -88,7 +88,7 @@ function treatPressure(JsonData, weather) {
   }
 }
 
-function treatWind(JsonData, weather) {
+function treatWind(JsonData) {
   try {
     weather.setWindySpeed(JsonData.wind.speed);
     weather.setWindyDegrees(JsonData.wind.deg);
@@ -124,7 +124,7 @@ function treatWind(JsonData, weather) {
   }
 }
 
-function treatSun(JsonData, weather) {
+function treatSun(JsonData) {
   try {
     weather.setSunrise(JsonData.sys.sunrise);
     weather.setSunset(JsonData.sys.sunset);
