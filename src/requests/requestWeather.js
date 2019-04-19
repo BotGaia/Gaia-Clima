@@ -64,9 +64,16 @@ function treatTemperature(JsonData, weather) {
     weather.setTemperatureMin(JsonData.main.temp_min);
     weather.setTemperatureMax(JsonData.main.temp_max);
   
-    far = parseFloat(weather.getTemperature());
-    farMax = parseFloat(weather.getTemperatureMax());
-    farMin = parseFloat(weather.getTemperatureMin());
+    kel = parseFloat(weather.getTemperature());
+    kelMax = parseFloat(weather.getTemperatureMax());
+    kelMin = parseFloat(weather.getTemperatureMin());
+
+    celsius = kel - 273.15;
+    celsiusMax = kelMax - 273.15;
+    celsiusMin = kelMin - 273.15;
+    weather.setTemperature(celsius.toString());
+    weather.setTemperatureMax(celsiusMax.toString());
+    weather.setTemperatureMin(celsiusMin.toString());
   } catch (error) {
     weather.setTemperature('error');
     weather.setTemperatureMin('error');
@@ -77,6 +84,9 @@ function treatTemperature(JsonData, weather) {
 function treatPressure(JsonData, weather) {
   try {
     weather.setPressure(JsonData.main.pressure);
+    hpa = parseFloat(weather.getPressure());
+    nm = 100*hpa;
+    weather.setPressure(nm.toString());
   } catch (error) {
     weather.setPressure('error');
   }
@@ -86,6 +96,33 @@ function treatWind(JsonData, weather) {
   try {
     weather.setWindySpeed(JsonData.wind.speed);
     weather.setWindyDegrees(JsonData.wind.deg);
+
+    ang = parseFloat(weather.getWindyDegrees());
+    if(ang>=337.5 && ang<22.5){
+      weather.setWindyDegrees('leste');
+    }
+    if(ang>=22.5 && ang<67.5){
+      weather.setWindyDegrees('nordeste');
+    }
+    if(ang>=67.5 && ang<112.5){
+      weather.setWindyDegrees('norte');
+    }
+    if(ang>=112.5 && ang<157.5){
+      weather.setWindyDegrees('noroeste');
+    }
+    if(ang>=157.5 && ang<202.5){
+      weather.setWindyDegrees('oeste');
+    }
+    if(ang>=202.5 && ang<247.5){
+      weather.setWindyDegrees('sudoeste');
+    }
+    if(ang>=247.5 && ang<292.5){
+      weather.setWindyDegrees('sul');
+    }
+    if(ang>=292.5 && ang<337.5){
+      weather.setWindyDegrees('sudeste');
+    }
+
   } catch (error) {
     weather.setWindySpeed('error');
     weather.setWindyDegrees('error');
@@ -126,8 +163,8 @@ router.get('/request', async (req, res) => {
       treatWind(JsonData, weather);
       treatSun(JsonData, weather);
       console.log(weather.getSky());
-      console.log(farMax);
-      console.log(farMin);
+      console.log(weather.getWindyDegrees());
+
 ;
       res.json(JsonData);
     });
