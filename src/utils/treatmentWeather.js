@@ -43,8 +43,8 @@ module.exports = {
 
   treatPressure: (pressure) => {
     const hpa = parseFloat(pressure);
-    const nm = 100 * hpa;
-    return nm.toString();
+    const atm = hpa / 1013.2501;
+    return atm.toFixed(2).toString();
   },
 
   treatWind: (wind) => {
@@ -76,10 +76,13 @@ module.exports = {
   },
 
   treatSun: (sun) => {
-    const sunr = parseFloat(sun);
+    const timestamp = parseFloat(sun);
+    var date = new Date(timestamp * 1000);
+    var hours = date.getHours();
+    var minutes = "0" + date.getMinutes();
+    var seconds = "0" + date.getSeconds();
 
-    const sr = new Date(sunr).toLocaleTimeString('pt-BR');
-
-    return sr.toString();
+    var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+    return formattedTime.toString();
   },
 }

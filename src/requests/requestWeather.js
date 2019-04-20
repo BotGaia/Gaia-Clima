@@ -1,5 +1,6 @@
 const https = require('https');
-const apiKey = process.env.API_KEY;
+const http = require('http');
+
 const targetIp = process.env.IP_ADDRESS;
 
 module.exports = {

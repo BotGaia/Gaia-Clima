@@ -15,4 +15,4 @@ module.exports = class Weather {
     this.humidity = JsonData.main.humidity;
     this.seaLevel = JsonData.main.seaLevel;
   }
-}
+};
