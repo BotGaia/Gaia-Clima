@@ -30,17 +30,15 @@ module.exports = {
     if (sky === 'heavy snow') {
       return ('neve intensa');
     }
+    return ('');
   },
-
   treatTemperature: (temp) => {
-
     const kel = parseFloat(temp);
 
     const celsius = kel - 273.15;
 
     return celsius.toFixed(2).toString();
   },
-
   treatPressure: (pressure) => {
     const hpa = parseFloat(pressure);
     const atm = hpa / 1013.2501;
@@ -73,16 +71,19 @@ module.exports = {
     if (ang >= 292.5 && ang < 337.5) {
       return ('sudeste');
     }
+    return ('');
   },
 
   treatSun: (sun) => {
     const timestamp = parseFloat(sun);
-    var date = new Date(timestamp * 1000);
-    var hours = date.getHours();
-    var minutes = "0" + date.getMinutes();
-    var seconds = "0" + date.getSeconds();
+    const date = new Date(timestamp * 1000);
+    const hours = date.getHours();
+    const zero = '0';
+    const points = ':';
+    const minutes = zero + date.getMinutes();
+    const seconds = zero + date.getSeconds();
 
-    var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+    const formattedTime = hours + points + minutes.substr(-2) + points + seconds.substr(-2);
     return formattedTime.toString();
   },
-}
+};
