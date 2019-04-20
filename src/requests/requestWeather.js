@@ -8,9 +8,16 @@ module.exports = {
   getLocal: (target) => {
     let localData = '';
     let localJsonData = '';
+    let URL = '';
+
+    if (process.env.ENVIRONMENT === 'dev') {
+      URL = `http://${targetIp}:3001/local?address=${target}`;
+    } else if (process.env.ENVIRONMENT === 'homolog') {
+      URL = `http://68.183.43.29:31170/local?address=${target}`;
+    }
 
     return new Promise((resolve) => {
-      http.get(`http://${targetIp}:3001/local?address=${target}`, (resp) => {
+      http.get(URL, (resp) => {
         resp.on('data', (chunk) => {
           localData += chunk;
         });
