@@ -32,19 +32,15 @@ E pegue o endereço de IP indicado no campo `Endereço IPv4`.
 
 Primeiro tem que instalar o docker, em seguida rode o projeto como desenvolvimento da seguinte maneira:
 
-```$ sudo docker build --rm -t gaiaclima .```
-
-Após o build, rode esse outro comando:
-
-```$ sudo docker run --env-file ./.env --rm -it -p 3000:3000 -v $PWD:/app -v /app/node_modules gaiaclima```
+```$ sudo docker-compose up --build```
 
 Para rodar os testes, rode esse comando:
 
-```$ sudo docker run --env-file ./.env --rm -it -p 3000:3000 -v $PWD:/app -v /app/node_modules gaiaclima /bin/sh -c "cd /app; npm test"```
+``` $ sudo docker-compose run gaiaclima /bin/sh -c "cd /app; npm i; npm run lint" ```
 
 Para rodar a folha de estilo, utilize este comando:
 
-```$ sudo docker run --rm -it -p 3000:3000 -v $PWD:/app -v /app/node_modules gaiaclima /bin/sh -c "cd /app; npm run lint"```
+``` $ sudo docker-compose run gaiaclima /bin/sh -c "cd /app; npm i; npm run test" ```
 
 ### Endpoints
 <table>
