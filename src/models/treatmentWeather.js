@@ -127,11 +127,11 @@ function treatSun(JsonData, weather) {
     weather.setSunrise(JsonData.sys.sunrise);
     weather.setSunset(JsonData.sys.sunset);
 
-    const sunr = parseInt(weather.getSunrise());
-    const suns = parseInt(weather.getSunset());
+    const sunr = parseFloat(weather.getSunrise());
+    const suns = parseFloat(weather.getSunset());
 
-    const sr = new Date(sunr).toLocaleTimeString("pt-BR");
-    const ss = new Date(suns).toLocaleTimeString("pt-BR");
+    const sr = new Date(sunr).toLocaleTimeString('pt-BR');
+    const ss = new Date(suns).toLocaleTimeString('pt-BR');
     weather.setSunset(ss.toString());
     weather.setSunrise(sr.toString());
   } catch (error) {

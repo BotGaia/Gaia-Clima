@@ -2,7 +2,7 @@ const https = require('https');
 
 module.exports = {
 
-  getWeather: (lat,lon) => {
+  getWeather: (lat, lon) => {
     let data = '';
     let JsonData = '';
     const apiKey = process.env.API_KEY;

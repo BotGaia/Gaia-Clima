@@ -13,7 +13,7 @@ describe('getName', () => {
     Request.getWeather('60.0272', '-169.7109').then((value) => {
       const weather = new Weather();
       treatment.treat(value, weather);
-      name = weather.getName();
+      const name = weather.getName();
       should.equal(name, '');
       done();
     });
