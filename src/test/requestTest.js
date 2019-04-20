@@ -20,23 +20,12 @@ describe('GET weather', () => {
   }).timeout(5000);
 });
 
-describe('Wrong parameters', () => {
-  it('should return a 400 error', (done) => {
-    chai.request(app).get('/request?lat=22&lon=RUSBÉ').end((err, res) => {
-      res.should.have.status(200);
-      res.body.should.be.a('Object');
-      res.body.should.have.property('name').eql('error');
-      done();
-    });
-  }).timeout(5000);
-});
-
 describe('Invalid or missing parameter', () => {
   it('should return a 400 error', (done) => {
     chai.request(app).get('/request?lat=22').end((err, res) => {
       res.should.have.status(200);
       res.body.should.be.a('Object');
-      res.body.should.have.property('sky').eql('error');
+      res.body.should.have.property('cod').eql('400');
       done();
     });
   }).timeout(5000);
@@ -47,7 +36,7 @@ describe('Unexisting location', () => {
     chai.request(app).get('/request?lat=-92&lon=182').end((err, res) => {
       res.should.have.status(200);
       res.body.should.be.a('Object');
-      res.body.should.have.property('temperature').eql('error');
+      res.body.should.have.property('cod').eql('400');
       done();
     });
   }).timeout(5000);

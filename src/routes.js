@@ -8,8 +8,11 @@ const router = express.Router();
 
 router.get('/request', (req, res) => {
   request.getWeather(req.query.lat, req.query.lon).then((JsonData) => {
-    const weather = new Weather(JsonData);
-    res.json(weather);
+    if (JsonData.cod === '200') {
+      const weather = new Weather(JsonData);      
+      res.json(weather);
+    }
+    res.json(JsonData);
   });
 });
 

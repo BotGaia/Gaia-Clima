@@ -4,18 +4,15 @@
 const chai = require('chai');
 
 const should = chai.should();
-const treatment = require('../models/treatmentWeather.js');
-const Request = require('../requests/requestWeather');
-const Weather = require('../models/Weather');
+const treatment = require('../utils/treatmentWeather.js');
+// const Request = require('../requests/requestWeather');
+// const Weather = require('../models/Weather');
 
-describe('getName', () => {
-  it('get Name', (done) => {
-    Request.getWeather('60.0272', '-169.7109').then((value) => {
-      const weather = new Weather();
-      treatment.treat(value, weather);
-      const name = weather.getName();
-      should.equal(name, '');
+describe('get Temperature', () => {
+  it('get Temperature', (done) => {
+      const a = treatment.treatTemperature('332.98');
+      a.should.equal('59.83');
       done();
     });
   }).timeout(5000);
-});
+
