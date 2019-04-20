@@ -1,24 +1,23 @@
 const https = require('https');
-const express = require('express');
 
-const router = express.Router();
+module.exports = {
 
-router.get('/request', async (req, res) => {
-  const { query: { lati: lat } } = req;
-  const { query: { long: lon } } = req;
-  let data = '';
-  let JsonData = '';
-  const apiKey = process.env.API_KEY;
+  getWeather: (lat, lon) => {
+    let data = '';
+    let JsonData = '';
+    const apiKey = process.env.API_KEY;
 
-  https.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`, (resp) => {
-    resp.on('data', (chunk) => {
-      data += chunk;
+    return new Promise((resolve) => {
+      https.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`, (resp) => {
+        resp.on('data', (chunk) => {
+          data += chunk;
+        });
+
+        resp.on('end', () => {
+          JsonData = JSON.parse(data);
+          resolve(JsonData);
+        });
+      });
     });
-
-    resp.on('end', () => {
-      JsonData = JSON.parse(data);
-      res.json(JsonData);
-    });
-  });
-});
-module.exports = app => app.use('/', router);
+  },
+};
