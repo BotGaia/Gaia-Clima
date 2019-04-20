@@ -3,22 +3,38 @@ image: docker:latest
 services:
   - docker:dind
 
+before_script:
+  - docker build --rm -t gaiaclima .
+
+variables:
+  LATEST_VER: caleberios/gaia-clima:latest-hml
+
 stages:
   - build
   - test
   - quality
+  - deploy
 
 buildLocal:
   stage: build
   script:
-    - docker build --rm -t gaiaclima . 
+    - docker build --rm -t gaiaclima .
 
 testCheck:
   stage: test
   script:
-    - docker run --rm -it -p 3000:3000 -v $PWD:/app -v /app/node_modules gaiaclima /bin/sh -c "cd /app; npm test"
+    - docker run --rm -e API_KEY=$API_KEY gaiaclima /bin/sh -c "cd /app; npm test"
 
 staticAnalysis:
   stage: quality
   script:
-    - docker run --rm -it -p 3000:3000 -v $PWD:/app -v /app/node_modules gaiaclima /bin/sh -c "cd /app; npm run lint"
+    - docker run --rm -e API_KEY=$API_KEY gaiaclima /bin/sh -c "cd /app; npm run lint"
+
+deployHomolog:
+  stage: deploy
+  only:
+    - dev
+  script:
+    - docker build -t $LATEST_VER .
+    - echo "$REGISTRY_PASSWORD" | docker login -u "$REGISTRY_USER" --password-stdin
+    - docker push $LATEST_VER && docker image rm $LATEST_VER

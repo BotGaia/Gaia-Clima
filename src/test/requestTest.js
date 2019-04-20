@@ -4,6 +4,7 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const app = require('../index');
+const requestWeather = require('../requests/requestWeather');
 
 const should = chai.should();
 
@@ -29,7 +30,8 @@ describe('Wrong parameters', () => {
     });
   }).timeout(5000);
 });
-describe('Missing parameters', () => {
+
+describe('Invalid or missing parameter', () => {
   it('should return a 400 error', (done) => {
     chai.request(app).get('/request?lat=22').end((err, res) => {
       res.should.have.status(200);
@@ -40,7 +42,7 @@ describe('Missing parameters', () => {
   }).timeout(5000);
 });
 
-describe('Unexisting coordinates', () => {
+describe('Unexisting location', () => {
   it('should return a 400 error', (done) => {
     chai.request(app).get('/request?lat=-92&lon=182').end((err, res) => {
       res.should.have.status(200);

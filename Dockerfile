@@ -1,6 +1,7 @@
 FROM node:latest
 RUN mkdir /app
 WORKDIR /app
+ENV ENVIRONMENT=dev
 COPY package*.json /app/
 RUN npm install
 RUN npm i nodemon -g
