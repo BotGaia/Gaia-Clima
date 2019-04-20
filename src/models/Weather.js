@@ -1,6 +1,17 @@
 module.exports = class Weather {
-  constructor(name) {
-    this.name = name;
+  constructor() {
+    this.name = '';
+    this.sky = '';
+    this.temperature = '';
+    this.pressure = '';
+    this.windyDegrees = '';
+    this.windySpeed = '';
+    this.sunrise = '';
+    this.sunset = '';
+    this.temperatureMax = '';
+    this.temperatureMin = '';
+    this.humidity = '';
+    this.seaLevel = '';
   }
 
   setName(name) {

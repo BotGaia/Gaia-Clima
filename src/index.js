@@ -7,7 +7,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-require('./requests/requestWeather')(app);
+require('./routes')(app);
 
 app.get('/', (req, res) => {
   res.json({ Hello: 'World' });
