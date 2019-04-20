@@ -16,10 +16,8 @@ module.exports = {
         resp.on('end', () => {
           JsonData = JSON.parse(data);
           resolve(JsonData);
-          
         });
       });
     });
-
-  }
-}
+  },
+};

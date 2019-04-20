@@ -8,12 +8,11 @@ const router = express.Router();
 
 router.get('/request', (req, res) => {
   request.getWeather(req.query.lat, req.query.lon).then((JsonData) => {
-    let weather = new Weather(); 
+    const weather = new Weather();
     treatment.treat(JsonData, weather);
-    
+
     res.json(weather);
-    
-  })
+  });
 });
 
 module.exports = app => app.use('/', router);
