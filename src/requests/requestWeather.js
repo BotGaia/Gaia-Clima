@@ -1,18 +1,14 @@
 const https = require('https');
 const express = require('express');
 const Weather = require('../models/Weather.js');
-const treatment = require('../models/treatmentWeather');
 
 const weather = new Weather();
 
-function jsonToWeather(JsonData, weather) {
-
+function jsonDataToWeather(JsonData) {
   try {
     weather.setName(JsonData.name);
     weather.setHumidity(JsonData.main.humidity);
     weather.setSeaLevel(JsonData.main.sea_level);
-
-
   } catch (error) {
     weather.setName('error');
     weather.setHumidity('error');
@@ -20,54 +16,126 @@ function jsonToWeather(JsonData, weather) {
   }
 }
 
-function jsonToSky(JsonData, weather) {
+function treatSky(JsonData) {
   try {
     weather.setSky(JsonData.weather[0].description);
-    treatment.treatSky();
+    if (weather.getSky() === 'clear sky') {
+      weather.setSky('céu limpo');
+    }
+    if (weather.getSky() === 'few clouds') {
+      weather.setSky('poucas nuvens');
+    }
+    if (weather.getSky() === 'broken clouds') {
+      weather.setSky('céu parcialmente nublado');
+    }
+    if (weather.getSky() === 'scattered clouds') {
+      weather.setSky('nuvens dispersas');
+    }
+    if (weather.getSky() === 'moderate rain') {
+      weather.setSky('chuva moderada');
+    }
+    if (weather.getSky() === 'light rain') {
+      weather.setSky('leve chuva');
+    }
+    if (weather.getSky() === 'overcast clouds') {
+      weather.setSky('céu nublado');
+    }
+    if (weather.getSky() === 'light intensity') {
+      weather.setSky('sol forte');
+    }
+    if (weather.getSky() === 'shower rain') {
+      weather.setSky('chuva intensa');
+    }
+    if (weather.getSky() === 'heavy snow') {
+      weather.setSky('neve intensa');
+    }
   } catch (error) {
     weather.setSky('error');
   }
 }
 
-function jsonToTemperature(JsonData, weather) {
+function treatTemperature(JsonData) {
   try {
     weather.setTemperature(JsonData.main.temp);
     weather.setTemperatureMin(JsonData.main.temp_min);
     weather.setTemperatureMax(JsonData.main.temp_max);
-    treatment.treatTemperature();
+
+    const kel = parseFloat(weather.getTemperature());
+    const kelMax = parseFloat(weather.getTemperatureMax());
+    const kelMin = parseFloat(weather.getTemperatureMin());
+
+    const celsius = kel - 273.15;
+    const celsiusMax = kelMax - 273.15;
+    const celsiusMin = kelMin - 273.15;
+
+    weather.setTemperature(celsius.toString());
+    weather.setTemperatureMax(celsiusMax.toString());
+    weather.setTemperatureMin(celsiusMin.toString());
   } catch (error) {
     weather.setTemperature('error');
     weather.setTemperatureMin('error');
-    weather.setTemperatureMax('error'); 
+    weather.setTemperatureMax('error');
   }
-
 }
-
-function jsonToPressure(JsonData, weather) {
+function treatPressure(JsonData) {
   try {
     weather.setPressure(JsonData.main.pressure);
-    treatment.treatPressure();
+    const hpa = parseFloat(weather.getPressure());
+    const nm = 100 * hpa;
+    weather.setPressure(nm.toString());
   } catch (error) {
     weather.setPressure('error');
   }
 }
 
-function jsonToWindy(JsonData, weather) {
+function treatWind(JsonData) {
   try {
     weather.setWindySpeed(JsonData.wind.speed);
     weather.setWindyDegrees(JsonData.wind.deg);
-    treatment.treatWindy()
+
+    const ang = parseFloat(weather.getWindyDegrees());
+    if (ang >= 337.5 && ang < 22.5) {
+      weather.setWindyDegrees('leste');
+    }
+    if (ang >= 22.5 && ang < 67.5) {
+      weather.setWindyDegrees('nordeste');
+    }
+    if (ang >= 67.5 && ang < 112.5) {
+      weather.setWindyDegrees('norte');
+    }
+    if (ang >= 112.5 && ang < 157.5) {
+      weather.setWindyDegrees('noroeste');
+    }
+    if (ang >= 157.5 && ang < 202.5) {
+      weather.setWindyDegrees('oeste');
+    }
+    if (ang >= 202.5 && ang < 247.5) {
+      weather.setWindyDegrees('sudoeste');
+    }
+    if (ang >= 247.5 && ang < 292.5) {
+      weather.setWindyDegrees('sul');
+    }
+    if (ang >= 292.5 && ang < 337.5) {
+      weather.setWindyDegrees('sudeste');
+    }
   } catch (error) {
     weather.setWindySpeed('error');
     weather.setWindyDegrees('error');
   }
 }
 
-function jsonToSun(JsonData, weather) {
+function treatSun(JsonData) {
   try {
     weather.setSunrise(JsonData.sys.sunrise);
     weather.setSunset(JsonData.sys.sunset);
-    treatment.treatSun();
+
+    const sunr = parseInt(weather.getSunrise());
+    const suns = parseInt(weather.getSunset());
+
+    const sr = new Date(sunr).toLocaleTimeString("pt-BR");
+    const ss = new Date(suns).toLocaleTimeString("pt-BR");
+    weather.setSunset(ss.toString());
+    weather.setSunrise(sr.toString());
   } catch (error) {
     weather.setSunrise('error');
     weather.setSunset('error');
@@ -90,23 +158,13 @@ router.get('/request', async (req, res) => {
 
     resp.on('end', () => {
       JsonData = JSON.parse(data);
-      jsonToWeather(JsonData, weather);
-      jsonToSky(JsonData, weather);
-      jsonToTemperature(JsonData, weather);
-      jsonToPressure(JsonData, weather);
-      jsonToWindy(JsonData, weather);
-      jsonToSun(JsonData, weather);
+      jsonDataToWeather(JsonData, weather);
+      treatSky(JsonData, weather);
+      treatTemperature(JsonData, weather);
+      treatPressure(JsonData, weather);
+      treatWind(JsonData, weather);
+      treatSun(JsonData, weather);
       res.json(JsonData);
-      console.log(weather.getName());
-      console.log(weather.getHumidity());
-      console.log(weather.getSky());
-      console.log(weather.getSeaLevel());
-      console.log(weather.getTemperature());
-      console.log(weather.getPressure());
-      console.log(weather.getWindyDegrees());
-      console.log(weather.getWindySpeed());
-      console.log(weather.getSunrise());
-      
     });
   });
 });
