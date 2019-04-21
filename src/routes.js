@@ -1,17 +1,17 @@
 const express = require('express');
-const request = require('../src/requests/requestWeather');
+const requestWeather = require('../src/requests/requestWeather');
 const Weather = require('../src/models/Weather');
 
 const router = express.Router();
 
-
 router.get('/request', (req, res) => {
-  request.getWeather(req.query.lat, req.query.lon).then((JsonData) => {
-    if (JsonData.cod === '200') {
-      const weather = new Weather(JsonData);
-      res.json(weather);
-    }
-    res.json(JsonData);
+  requestWeather.getLocal(req.query.place).then((coordsJson) => {
+    requestWeather.getWeather(coordsJson).then((weatherJson) => {
+      if (weatherJson.cod == 200) {
+      	const weather = new Weather(weatherJson);
+      }
+      res.json(weatherJson);
+    });
   });
 });
 
