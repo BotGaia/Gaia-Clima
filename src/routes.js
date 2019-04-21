@@ -7,8 +7,9 @@ const router = express.Router();
 router.get('/request', (req, res) => {
   requestWeather.getLocal(req.query.place).then((coordsJson) => {
     requestWeather.getWeather(coordsJson).then((weatherJson) => {
-      if (weatherJson.cod == 200) {
-      	const weather = new Weather(weatherJson);
+      if (weatherJson.cod === 200) {
+        const weather = new Weather(weatherJson);
+        res.json(weather);
       }
       res.json(weatherJson);
     });

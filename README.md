@@ -36,11 +36,11 @@ Primeiro tem que instalar o docker, em seguida rode o projeto como desenvolvimen
 
 Para rodar os testes, rode esse comando:
 
-``` $ sudo docker-compose run gaiaclima /bin/sh -c "cd /app; npm i; npm run lint" ```
+``` $ sudo docker-compose run gaiaclima /bin/sh -c "cd /app; npm i; npm run test" ```
 
 Para rodar a folha de estilo, utilize este comando:
 
-``` $ sudo docker-compose run gaiaclima /bin/sh -c "cd /app; npm i; npm run test" ```
+``` $ sudo docker-compose run gaiaclima /bin/sh -c "cd /app; npm i; npm run lint" ```
 
 ### Endpoints
 <table>

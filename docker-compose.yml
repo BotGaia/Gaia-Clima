@@ -7,6 +7,7 @@ services:
     environment:
       - API_KEY=${API_KEY}
       - ENVIRONMENT=dev
+      - IP_ADDRESS=${IP_ADDRESS}
     volumes:
       - .:/app
       - /app/node_modules

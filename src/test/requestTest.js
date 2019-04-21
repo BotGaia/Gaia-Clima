@@ -12,9 +12,11 @@ chai.use(chaiHttp);
 
 describe('GET weather', () => {
   it('should get a weather object', (done) => {
-    chai.request(app).get('/request?lat=22&lon=25').end((err, res) => {
-      res.should.have.status(200);
-      res.body.should.be.a('Object');
+    const getLocalResponse = JSON.parse('{"lat":"-10.3333333","lng":"-53.2"}');
+
+    requestWeather.getWeather(getLocalResponse).then((weatherJson) => {
+      weatherJson.should.be.a('Object');
+      weatherJson.should.have.property('cod').eql(200);
       done();
     });
   }).timeout(5000);
@@ -22,10 +24,11 @@ describe('GET weather', () => {
 
 describe('Invalid or missing parameter', () => {
   it('should return a 400 error', (done) => {
-    chai.request(app).get('/request?lat=22').end((err, res) => {
-      res.should.have.status(200);
-      res.body.should.be.a('Object');
-      res.body.should.have.property('cod').eql('400');
+    const getLocalResponse = JSON.parse('{}');
+
+    requestWeather.getWeather(getLocalResponse).then((weatherJson) => {
+      weatherJson.should.be.a('Object');
+      weatherJson.should.have.property('cod').eql('400');
       done();
     });
   }).timeout(5000);
@@ -33,10 +36,11 @@ describe('Invalid or missing parameter', () => {
 
 describe('Unexisting location', () => {
   it('should return a 400 error', (done) => {
-    chai.request(app).get('/request?lat=-92&lon=182').end((err, res) => {
-      res.should.have.status(200);
-      res.body.should.be.a('Object');
-      res.body.should.have.property('cod').eql('400');
+    const getLocalResponse = JSON.parse('{"lat":"error","lng":"error"}');
+
+    requestWeather.getWeather(getLocalResponse).then((weatherJson) => {
+      weatherJson.should.be.a('Object');
+      weatherJson.should.have.property('cod').eql('400');
       done();
     });
   }).timeout(5000);
