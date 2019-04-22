@@ -25,6 +25,9 @@ module.exports = {
           localJsonData = JSON.parse(localData);
           resolve(localJsonData);
         });
+      }).on('error', () => {
+        const errorJson = JSON.parse('{"lat":"error","lng":"error"}');
+        resolve(errorJson);
       });
     });
   },
@@ -32,7 +35,6 @@ module.exports = {
   getWeather: (localJson) => {
     const { lat } = localJson;
     const { lng } = localJson;
-
     let data = '';
     let JsonData = '';
     const apiKey = process.env.API_KEY;

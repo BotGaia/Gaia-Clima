@@ -10,8 +10,9 @@ router.get('/request', (req, res) => {
       if (weatherJson.cod === 200) {
         const weather = new Weather(weatherJson);
         res.json(weather);
+      } else {
+        res.json(weatherJson);
       }
-      res.json(weatherJson);
     });
   });
 });
