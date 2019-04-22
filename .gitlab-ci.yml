@@ -8,7 +8,8 @@ before_script:
   - pip install docker-compose
 
 variables:
-  LATEST_VER: caleberios/gaia-clima:latest-hml
+  LATEST_VER_HML: caleberios/gaia-clima:homolog
+  LATEST_VER_PROD: caleberios/gaia-clima:latest
 
 stages:
   - build
@@ -36,6 +37,15 @@ deployHomolog:
   only:
     - dev
   script:
-    - docker build -t $LATEST_VER .
+    - docker build -t $LATEST_VER_HML .
     - echo "$REGISTRY_PASSWORD" | docker login -u "$REGISTRY_USER" --password-stdin
-    - docker push $LATEST_VER && docker image rm $LATEST_VER
+    - docker push $LATEST_VER_HML && docker image rm $LATEST_VER_HML
+
+deployProd:
+  stage: deploy
+  only:
+    - master
+  script:
+    - docker build -t $LATEST_VER_PROD .
+    - echo "$REGISTRY_PASSWORD" | docker login -u "$REGISTRY_USER" --password-stdin
+    - docker push $LATEST_VER_PROD && docker image rm $LATEST_VER_PROD
