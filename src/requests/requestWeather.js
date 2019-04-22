@@ -25,17 +25,22 @@ module.exports = {
           localJsonData = JSON.parse(localData);
           resolve(localJsonData);
         });
+      }).on('error', () => {
+        const errorJson = JSON.parse('{"lat":"error","lng":"error"}');
+        resolve(errorJson);
       });
     });
   },
 
-  getWeather: (lat, lon) => {
+  getWeather: (localJson) => {
+    const { lat } = localJson;
+    const { lng } = localJson;
     let data = '';
     let JsonData = '';
     const apiKey = process.env.API_KEY;
 
     return new Promise((resolve) => {
-      https.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`, (resp) => {
+      https.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${apiKey}`, (resp) => {
         resp.on('data', (chunk) => {
           data += chunk;
         });
