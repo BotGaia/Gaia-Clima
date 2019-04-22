@@ -23,6 +23,9 @@ services:
       - AUTH=yes
       - MONGODB_ADMIN_USER=gaiaclima
       - MONGODB_ADMIN_PASS=admin123
+      - MONGODB_APPLICATION_DATABASE=gaiaclima
+      - MONGODB_APPLICATION_USER=aashrey
+      - MONGODB_APPLICATION_PASS=admin123
     command: mongod --port 27018
     ports: 
       - 27018:27018
