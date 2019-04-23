@@ -5,7 +5,7 @@ const Weather = require('../src/models/Weather');
 const router = express.Router();
 
 router.get('/request', (req, res) => {
-  requestWeather.getLocal(req.query.place).then((coordsJson) => {
+  requestWeather.getLocal(req.query.city, req.query.country).then((coordsJson) => {
     requestWeather.getWeather(coordsJson).then((weatherJson) => {
       if (weatherJson.cod === 200) {
         const weather = new Weather(weatherJson);

@@ -4,7 +4,8 @@ const http = require('http');
 const targetIp = process.env.IP_ADDRESS;
 
 module.exports = {
-  getLocal: (target) => {
+  getLocal: (city, country) => {
+    const target = `${city.replace(/ /g, '+')}+${country.replace(/ /g, '+')}`;
     let localData = '';
     let localJsonData = '';
     let URL = '';

@@ -46,9 +46,11 @@ Para rodar a folha de estilo, utilize este comando:
 <table>
 	<tr>
 		<td>GET</td>
-		<td>localhost:3000/request?place={VALOR}</td>
+		<td>localhost:3000/request?city={VALOR}&country={VALOR}</td>
 		<td>place</td>
 		<td>string</td>
-		<td>Recebe informação a respeito do clima no local informado</td>
+		<td>country</td>
+		<td>string</td>
+		<td>Retorna informação a respeito do clima no local informado</td>
 	</tr>
 </table>
