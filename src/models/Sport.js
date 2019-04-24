@@ -16,7 +16,23 @@ module.exports = class Sport {
   }
 
   saveSport() {
-    this.sport.save();
+    return new Promise((resolve) => {
+      this.sport.save().then(() => {
+        resolve();
+      })
+    });
+  }
+
+  deleteMe() {
+    return new Promise((resolve, reject) => {
+      SportModel.deleteOne({ name: this.sport.name }, (err) => {
+        if(err) {
+          reject(err);
+        }else{
+          resolve();
+        }
+      })
+    })
   }
 
   findMe() {

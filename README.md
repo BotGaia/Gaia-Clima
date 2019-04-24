@@ -48,6 +48,10 @@ Para salvar um esporte novo no banco rode o comando:
 
 ```$ sudo docker exec -it {containerid} node -e 'require("./src/db/dbActions").saveSport({nomeDoEsporte})'```
 
+Para deletar um esporte do banco rode o comando:
+
+```$ sudo docker exec -it {containerid} node -e 'require("./src/db/dbActions").deleteSport({nomeDoEsporte})```
+
 Para conseguir o 'containerid' rode:
 
 ```$ sudo docker ps```
