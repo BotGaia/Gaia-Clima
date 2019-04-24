@@ -18,18 +18,6 @@ router.get('/request', (req, res) => {
   });
 });
 
-router.get('/addSport', (req, res) => {
-  if(new Sport(req.query.name).findMe()) {
-    res.write('This sport already exists.')
-  } else {
-    new Sport(req.query.name).saveSport();
-    if(new Sport(req.query.name).findMe()) {
-      res.write('Sport saved.')
-    } else {
-      res.write('Failed to save sport')
-    }
-    
-  }
-})
+
 
 module.exports = app => app.use('/', router);

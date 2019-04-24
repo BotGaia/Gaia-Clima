@@ -42,6 +42,18 @@ Para rodar a folha de estilo, utilize este comando:
 
 ``` $ sudo docker-compose run gaiaclima /bin/sh -c "cd /app; npm i; npm run lint" ```
 
+### Salvando esportes no banco de dados
+
+Para salvar um esporte novo no banco rode o comando:
+
+```$ sudo docker exec -it {containerid} node -e 'require("./src/db/dbActions").saveSport({nomeDoEsporte})'```
+
+Para conseguir o 'containerid' rode:
+
+```$ sudo docker ps```
+
+e pegue o containerid do container caleberios/gaia-clima.
+
 ### Endpoints
 <table>
 	<tr>
