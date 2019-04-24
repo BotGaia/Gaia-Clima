@@ -18,6 +18,10 @@ router.get('/request', (req, res) => {
   });
 });
 
+router.get('/requestSport', (req, res) => {
+  res.json(new Sport('esporte'));
+})
+
 
 
 module.exports = app => app.use('/', router);

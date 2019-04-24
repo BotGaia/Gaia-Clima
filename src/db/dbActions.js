@@ -3,14 +3,16 @@ const mongooseConnection = require("../config/mongooseConnection")
 
 module.exports = {
 
-  saveSport(sportName) {
+  saveSport(sportName, temperatureUpperLimit, temperatureLowerLimit, humidityUpperLimit, humidityLowerLimit, windSpeedUpperLimit, windSpeedLowerLimit) {
     mongooseConnection.connect();
     new Sport(sportName).findMe().then((isFound) => {
       if (isFound) {
         console.log('This sport already exists.');
         process.exit();
       } else {
-        new Sport(sportName).saveSport().then(() => {
+        let sport = new Sport(sportName);
+        sport.buildSport(temperatureUpperLimit, temperatureLowerLimit, humidityUpperLimit, humidityLowerLimit, windSpeedUpperLimit, windSpeedLowerLimit);
+        sport.saveSport().then(() => {
           new Sport(sportName).findMe().then((isFound) => {
             if (isFound) {
               console.log("sport saved");
@@ -19,9 +21,39 @@ module.exports = {
               console.log("failed to save sport")
               process.exit();
             }
-          })
+          });
         });
+      }
+    });
+  },
 
+  updateSport(sportName, temperatureUpperLimit, temperatureLowerLimit, humidityUpperLimit, humidityLowerLimit, windSpeedUpperLimit, windSpeedLowerLimit) {
+    mongooseConnection.connect();
+    let sport = new Sport(sportName);
+    sport.findMe().then((isFound) => {
+      if (isFound) {
+        sport.buildSport(temperatureUpperLimit, temperatureLowerLimit, humidityUpperLimit, humidityLowerLimit, windSpeedUpperLimit, windSpeedLowerLimit);
+        sport.saveSport().then(() => {
+          console.log("sport updated");
+          process.exit();
+        });
+      } else {
+        console.log("sport not found");
+        process.exit();
+      }
+    });
+  },
+
+  printSport(sportName) {
+    mongooseConnection.connect();
+    let sport = new Sport(sportName);
+    sport.findMe().then((isFound) => {
+      if (isFound) {
+        console.log(sport);
+        process.exit();
+      } else {
+        console.log("sport not found");
+        process.exit();
       }
     });
   },
@@ -35,8 +67,8 @@ module.exports = {
             if (isFound) {
               console.log("could not delete");
               process.exit();
-            }else{
-              console.log("deleted")
+            } else {
+              console.log("deleted");
               process.exit();
             }
           });
@@ -46,5 +78,5 @@ module.exports = {
         process.exit();
       }
     });
-  }
+  },
 }

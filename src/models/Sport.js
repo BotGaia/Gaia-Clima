@@ -7,7 +7,39 @@ module.exports = class Sport {
   constructor(name) {
     this.sport = new SportModel({
       name,
+      temperature: {
+        upperLimit: '',
+        lowerLimit: '',
+      },
+      humidity: {
+        upperLimit: '',
+        lowerLimit: '',
+      },
+      windSpeed: {
+        upperLimit: '',
+        lowerLimit: '',
+      },
     });
+  }
+
+  buildSport(temperatureUpperLimit, temperatureLowerLimit, humidityUpperLimit, humidityLowerLimit, windSpeedUpperLimit, windSpeedLowerLimit) {
+    const builtSport = new SportModel({
+      name: this.sport.name,
+      temperature: {
+        upperLimit: temperatureUpperLimit,
+        lowerLimit: temperatureLowerLimit,
+      },
+      humidity: {
+        upperLimit: humidityUpperLimit,
+        lowerLimit: humidityLowerLimit,
+      },
+      windSpeed: {
+        upperLimit: windSpeedUpperLimit,
+        lowerLimit: windSpeedLowerLimit,
+      },
+    });
+
+    this.sport = builtSport;
   }
 
 
@@ -26,9 +58,9 @@ module.exports = class Sport {
   deleteMe() {
     return new Promise((resolve, reject) => {
       SportModel.deleteOne({ name: this.sport.name }, (err) => {
-        if(err) {
+        if (err) {
           reject(err);
-        }else{
+        } else {
           resolve();
         }
       })
@@ -43,7 +75,6 @@ module.exports = class Sport {
             this.sport = sport;
             resolve(true);
           }
-
           resolve(false);
         });
     });

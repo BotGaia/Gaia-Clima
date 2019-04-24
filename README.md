@@ -46,7 +46,7 @@ Para rodar a folha de estilo, utilize este comando:
 
 Para salvar um esporte novo no banco rode o comando:
 
-```$ sudo docker exec -it {containerid} node -e 'require("./src/db/dbActions").saveSport({nomeDoEsporte})'```
+```$ sudo docker exec -it {containerid} node -e 'require("./src/db/dbActions").saveSport({nomeDoEsporte}, {limiteSuperiorDaTemperatura}, {limiteInferiorDaTemperatura}, {limiteSuperiorDaHumidade}, {limiteInferiorDaHumidade}, {limiteSuperiorDaVelocidadeDoVento}, {limiteInferiorDaVelocidadeDoVento})'```
 
 Para deletar um esporte do banco rode o comando:
 
