@@ -46,11 +46,11 @@ Para rodar a folha de estilo, utilize este comando:
 <table>
 	<tr>
 		<td>GET</td>
-		<td>localhost:3000/request?city={VALOR}&country={VALOR}</td>
-		<td>place</td>
-		<td>string</td>
-		<td>country</td>
-		<td>string</td>
-		<td>Retorna informação a respeito do clima no local informado</td>
+		<td>localhost:3000/request?lat={VALOR}&lng={VALOR}</td>
+		<td>lat</td>
+		<td>float</td>
+		<td>lng</td>
+		<td>float</td>
+		<td>Retorna informação a respeito do clima nas coordenadas informadas</td>
 	</tr>
 </table>

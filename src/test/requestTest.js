@@ -12,35 +12,42 @@ chai.use(chaiHttp);
 
 describe('GET weather', () => {
   it('should get a weather object', (done) => {
-    const getLocalResponse = JSON.parse('{"lat":"-10.3333333","lng":"-53.2"}');
-
-    requestWeather.getWeather(getLocalResponse).then((weatherJson) => {
-      weatherJson.should.be.a('Object');
-      weatherJson.should.have.property('cod').eql(200);
+    chai.request(app).get('/request?lat=3.14&lng=2.65').end((err, res) => {
+      res.should.have.status(200);
+      res.body.should.be.a('Object');
       done();
     });
   }).timeout(5000);
 });
 
-describe('Invalid or missing parameter', () => {
+describe('Invalid parameters', () => {
   it('should return a 400 error', (done) => {
-    const getLocalResponse = JSON.parse('{}');
-
-    requestWeather.getWeather(getLocalResponse).then((weatherJson) => {
-      weatherJson.should.be.a('Object');
-      weatherJson.should.have.property('cod').eql('400');
+    chai.request(app).get('/request?lat=3.14&lng=RUSBÉ').end((err, res) => {
+      res.should.have.status(200);
+      res.body.should.be.a('Object');
+      res.body.should.have.property('cod').eql('400');
       done();
     });
   }).timeout(5000);
 });
 
-describe('Unexisting location', () => {
+describe('Missing parameters', () => {
   it('should return a 400 error', (done) => {
-    const getLocalResponse = JSON.parse('{"lat":"error","lng":"error"}');
+    chai.request(app).get('/request?lat=3.14').end((err, res) => {
+      res.should.have.status(200);
+      res.body.should.be.a('Object');
+      res.body.should.have.property('cod').eql('400');
+      done();
+    });
+  }).timeout(5000);
+});
 
-    requestWeather.getWeather(getLocalResponse).then((weatherJson) => {
-      weatherJson.should.be.a('Object');
-      weatherJson.should.have.property('cod').eql('400');
+describe('Unexisting coordinates', () => {
+  it('should return a 400 error', (done) => {
+    chai.request(app).get('/request?lat=-92&lng=182').end((err, res) => {
+      res.should.have.status(200);
+      res.body.should.be.a('Object');
+      res.body.should.have.property('cod').eql('400');
       done();
     });
   }).timeout(5000);
