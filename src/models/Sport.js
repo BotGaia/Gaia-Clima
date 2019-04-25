@@ -7,6 +7,7 @@ module.exports = class Sport {
   constructor(name) {
     this.sport = new SportModel({
       name,
+      class: 'sport',
       temperature: {
         upperLimit: '',
         lowerLimit: '',
@@ -25,6 +26,7 @@ module.exports = class Sport {
   buildSport(temperatureUpperLimit, temperatureLowerLimit, humidityUpperLimit, humidityLowerLimit, windSpeedUpperLimit, windSpeedLowerLimit) {
     const builtSport = new SportModel({
       name: this.sport.name,
+      class: 'sport',
       temperature: {
         upperLimit: temperatureUpperLimit,
         lowerLimit: temperatureLowerLimit,
