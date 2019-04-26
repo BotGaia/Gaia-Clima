@@ -4,12 +4,21 @@ const Interval = require('../models/Interval');
 module.exports = {
 
   saveAllSports() {
-    this.saveLol();
-    this.saveWindsurf();
-    this.saveKitesurf();
-    this.saveSurf();
-    this.saveStandUpPaddle();
-    this.saveVela();
+    return new Promise(() => {
+      this.saveLol().then(() => {
+        this.saveWindsurf().then(() => {
+          this.saveKitesurf().then(() => {
+            this.saveSurf().then(() => {
+              this.saveStandUpPaddle().then(() => {
+                this.saveVela().then(() => {
+                resolve();
+                });
+              });
+            });
+          });
+        });
+      });;
+    });
   },
 
   saveWindsurf() {
@@ -33,88 +42,99 @@ module.exports = {
   },
 
   saveKitesurf() {
-    const sport = new Sport('Kitesurf');
-    const temperatureInterval = new Interval('24', '15');
-    const humidityInterval = new Interval('70', '21');
-    let windSpeedInterval = new Interval('10.28', '0');
-    sport.appendTemperatureLimitAray(temperatureInterval);
-    sport.appendHumidityLimitAray(humidityInterval);
-    sport.appendwindSpeedLimitAray(windSpeedInterval);
-    windSpeedInterval = new Interval('25.7', '15.934');
-    sport.appendwindSpeedLimitAray(windSpeedInterval);
-
-    sport.findMe().then((isFound) => {
-      if (!isFound) {
-        sport.saveSport();
-      }
+    return new Promise((resolve) => {
+      const sport = new Sport('Kitesurf');
+      const temperatureInterval = new Interval('24', '15');
+      const humidityInterval = new Interval('70', '21');
+      let windSpeedInterval = new Interval('10.28', '0');
+      sport.appendTemperatureLimitAray(temperatureInterval);
+      sport.appendHumidityLimitAray(humidityInterval);
+      sport.appendwindSpeedLimitAray(windSpeedInterval);
+      windSpeedInterval = new Interval('25.7', '15.934');
+      sport.appendwindSpeedLimitAray(windSpeedInterval);
+  
+      sport.findMe().then((isFound) => {
+        if (!isFound) {
+          sport.saveSport().then(() => { resolve(); });
+        }
+      });
     });
   },
 
   saveSurf() {
-    const sport = new Sport('Surf');
-    const temperatureInterval = new Interval('35', '25');
-    const humidityInterval = new Interval('70', '21');
-    const windSpeedInterval = new Interval('20.56', '10.794');
-    sport.appendTemperatureLimitAray(temperatureInterval);
-    sport.appendHumidityLimitAray(humidityInterval);
-    sport.appendwindSpeedLimitAray(windSpeedInterval);
-
-    sport.findMe().then((isFound) => {
-      if (!isFound) {
-        sport.saveSport();
-      }
+    return new Promise((resolve) => {
+      const sport = new Sport('Surf');
+      const temperatureInterval = new Interval('35', '25');
+      const humidityInterval = new Interval('70', '21');
+      const windSpeedInterval = new Interval('20.56', '10.794');
+      sport.appendTemperatureLimitAray(temperatureInterval);
+      sport.appendHumidityLimitAray(humidityInterval);
+      sport.appendwindSpeedLimitAray(windSpeedInterval);
+  
+      sport.findMe().then((isFound) => {
+        if (!isFound) {
+          sport.saveSport().then(() => { resolve(); });
+        }
+      });
     });
   },
 
   saveStandUpPaddle() {
-    const sport = new Sport('Stand Up Paddle');
-    const temperatureInterval = new Interval('29', '20');
-    const humidityInterval = new Interval('70', '21');
-    const windSpeedInterval = new Interval('20.56', '10.794');
-    sport.appendTemperatureLimitAray(temperatureInterval);
-    sport.appendHumidityLimitAray(humidityInterval);
-    sport.appendwindSpeedLimitAray(windSpeedInterval);
-
-    sport.findMe().then((isFound) => {
-      if (!isFound) {
-        sport.saveSport();
-      }
+    return new Promise((resolve) => {
+      const sport = new Sport('Stand Up Paddle');
+      const temperatureInterval = new Interval('29', '20');
+      const humidityInterval = new Interval('70', '21');
+      const windSpeedInterval = new Interval('20.56', '10.794');
+      sport.appendTemperatureLimitAray(temperatureInterval);
+      sport.appendHumidityLimitAray(humidityInterval);
+      sport.appendwindSpeedLimitAray(windSpeedInterval);
+  
+      sport.findMe().then((isFound) => {
+        if (!isFound) {
+          sport.saveSport().then(() => { resolve(); });
+        }
+      });
     });
   },
 
   saveVela() {
-    const sport = new Sport('Vela');
-    let temperatureInterval = new Interval('24', '15');
-    const humidityInterval = new Interval('70', '40');
-    let windSpeedInterval = new Interval('10.28', '0');
-    sport.appendTemperatureLimitAray(temperatureInterval);
-    sport.appendHumidityLimitAray(humidityInterval);
-    sport.appendwindSpeedLimitAray(windSpeedInterval);
-    windSpeedInterval = new Interval('25.78', '21.074');
-    temperatureInterval = new Interval('35', '30');
-    sport.appendTemperatureLimitAray(temperatureInterval);
-    sport.appendwindSpeedLimitAray(windSpeedInterval);
-
-    sport.findMe().then((isFound) => {
-      if (!isFound) {
-        sport.saveSport();
-      }
+    return new Promise((resolve) => {
+      const sport = new Sport('Vela');
+      let temperatureInterval = new Interval('24', '15');
+      const humidityInterval = new Interval('70', '40');
+      let windSpeedInterval = new Interval('10.28', '0');
+      sport.appendTemperatureLimitAray(temperatureInterval);
+      sport.appendHumidityLimitAray(humidityInterval);
+      sport.appendwindSpeedLimitAray(windSpeedInterval);
+      windSpeedInterval = new Interval('25.78', '21.074');
+      temperatureInterval = new Interval('35', '30');
+      sport.appendTemperatureLimitAray(temperatureInterval);
+      sport.appendwindSpeedLimitAray(windSpeedInterval);
+  
+      sport.findMe().then((isFound) => {
+        if (!isFound) {
+          sport.saveSport().then(() => { resolve(); });
+        }
+      });
     });
   },
 
   saveLol() {
-    const sport = new Sport('loeel');
-    const temperatureInterval = new Interval('3000', '-3000');
-    const humidityInterval = new Interval('3000', '-3000');
-    const windSpeedInterval = new Interval('3000', '-3000');
-    sport.appendTemperatureLimitAray(temperatureInterval);
-    sport.appendHumidityLimitAray(humidityInterval);
-    sport.appendwindSpeedLimitAray(windSpeedInterval);
+    return new Promise((resolve) => {
 
-    sport.findMe().then((isFound) => {
-      if (!isFound) {
-        sport.saveSport();
-      }
+      const sport = new Sport('leol');
+      const temperatureInterval = new Interval('3000', '-3000');
+      const humidityInterval = new Interval('3000', '-3000');
+      const windSpeedInterval = new Interval('3000', '-3000');
+      sport.appendTemperatureLimitAray(temperatureInterval);
+      sport.appendHumidityLimitAray(humidityInterval);
+      sport.appendwindSpeedLimitAray(windSpeedInterval);
+  
+      sport.findMe().then((isFound) => {
+        if (!isFound) {
+          sport.saveSport().then(() => { resolve(); });
+        }
+      });
     });
   },
 
