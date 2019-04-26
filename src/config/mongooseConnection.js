@@ -17,6 +17,7 @@ module.exports = {
     };
 
     mongoose.connect('mongodb://mongo:27018/gaiaclima', options).then(() => {
+      this.saveAllSports();
     }).catch();
   },
 

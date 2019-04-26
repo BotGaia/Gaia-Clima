@@ -9,7 +9,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 mongooseConnection.connect();
-mongooseConnection.saveSports();
 
 require('./routes')(app);
 
