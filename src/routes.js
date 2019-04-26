@@ -24,7 +24,7 @@ router.get('/sports', (req, res) => {
       if (weatherJson.cod === 200) {
         const weather = new Weather(weatherJson);
         util.compare(weather).then((objectOfSports) => {
-          res.json(objectOfSports)
+          res.json(objectOfSports);
         });
       } else {
         res.json(weatherJson);
