@@ -42,21 +42,6 @@ Para rodar a folha de estilo, utilize este comando:
 
 ``` $ sudo docker-compose run gaiaclima /bin/sh -c "cd /app; npm i; npm run lint" ```
 
-### Salvando esportes no banco de dados
-
-Para salvar um esporte novo no banco rode o comando:
-
-```$ sudo docker exec -it {containerid} node -e 'require("./src/db/dbActions").saveSport({nomeDoEsporte}, {limiteSuperiorDaTemperatura}, {limiteInferiorDaTemperatura}, {limiteSuperiorDaHumidade}, {limiteInferiorDaHumidade}, {limiteSuperiorDaVelocidadeDoVento}, {limiteInferiorDaVelocidadeDoVento})'```
-
-Para deletar um esporte do banco rode o comando:
-
-```$ sudo docker exec -it {containerid} node -e 'require("./src/db/dbActions").deleteSport({nomeDoEsporte})```
-
-Para conseguir o 'containerid' rode:
-
-```$ sudo docker ps```
-
-e pegue o containerid do container caleberios/gaia-clima.
 
 ### Endpoints
 <table>
@@ -66,5 +51,19 @@ e pegue o containerid do container caleberios/gaia-clima.
 		<td>place</td>
 		<td>string</td>
 		<td>Recebe informação a respeito do clima no local informado</td>
+	</tr>
+	<tr>
+		<td>GET</td>
+		<td>localhost:3000/requestSport?place={VALOR}</td>
+		<td>place</td>
+		<td>string</td>
+		<td>Recebe esportes recomendados favoraveis, com ressalva e com alerta</td>
+	</tr>
+	<tr>
+		<td>GET</td>
+		<td>localhost:3000/allSports</td>
+		<td>-</td>
+		<td>-</td>
+		<td>Recebe todos os esportes presentes no banco de dados</td>
 	</tr>
 </table>
