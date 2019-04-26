@@ -7,12 +7,10 @@ const SportModel = mongoose.model('SportModel', SportSchema);
 
 
 module.exports = {
-  compare(place) {
+  compare(weather) {
     return new Promise((resolve) => {
-      this.getClima(place).then((weather) => {
-        this.getAllSports().then((array) => {
-          resolve(this.divideArrays(array, weather));
-        });
+      this.getAllSports().then((array) => {
+        resolve(this.divideArrays(array, weather));
       });
     });
   },
@@ -47,21 +45,6 @@ module.exports = {
       SportModel.find({ class: 'sport' }).then((array) => {
         resolve(array);
       }).catch(() => {
-      });
-    });
-  },
-
-  getClima(place) {
-    return new Promise((resolve) => {
-      requestWeather.getLocal(place).then((coordsJson) => {
-        requestWeather.getWeather(coordsJson).then((weatherJson) => {
-          if (weatherJson.cod === 200) {
-            const weather = new Weather(weatherJson);
-            resolve(weather);
-          } else {
-            resolve(weatherJson);
-          }
-        });
       });
     });
   },
