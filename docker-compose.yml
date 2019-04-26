@@ -1,9 +1,13 @@
-version: '2'
+version: '3'
 
 services:
-  app:
-    image: caleberios/wendy_node:latest
+  gaiaclima:
+    image: caleberios/gaia-clima:latest
     restart: always
+    environment:
+      - API_KEY=${API_KEY}
+      - ENVIRONMENT=dev
+      - IP_ADDRESS=${IP_ADDRESS}
     volumes:
       - .:/app
       - /app/node_modules
@@ -14,12 +18,11 @@ services:
       - mongo
   
   mongo:
-    image: bitnami/mongodb:latest
-    ports: 
-      - 27017:27017
+    image: aashreys/mongo-auth:latest
     environment:
-      - MONGODB_ROOT_PASSWORD=password123
-    labels:
-      kompose.service.type: nodeport
-    volumes:
-      - .mongodb_data:/data/db
+      - AUTH=yes
+      - MONGODB_ADMIN_USER=gaiaclima
+      - MONGODB_ADMIN_PASS=admin123
+    command: mongod --port 27018
+    ports: 
+      - 27018:27018
