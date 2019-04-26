@@ -8,15 +8,17 @@ const treatment = require('../utils/treatmentWeather.js');
 const compare = require('../utils/compareSportWithWeather');
 
 const Sport = require('../models/Sport');
+const Interval = require('../models/Interval');
 
-let sport = new Sport('sport');
 
-const fakeWeather = {temperature: 2.0, humidity: 2.0, windyspeed: 2.0};
+const fakeWeather = { temperature: 2.0, humidity: 2.0, windyspeed: 2.0 };
 
 describe('Compare something', () => {
-    it('should be equal or not', (done) => {
-        console.log(sport.temperature+'-------------------------------------')
-        const tof = compare.compareTemperature(sport, fakeWeather);
-        tof.should.be.true;
-    });
-})
+  it('should be equal or not', () => {
+    const sport = new Sport('sport');
+    const interval = new Interval('3', '1');
+    sport.appendTemperatureLimitAray(interval);
+    const tof = compare.compareTemperature(sport.getSport(), fakeWeather);
+    tof.should.be.equal(true);
+  });
+});

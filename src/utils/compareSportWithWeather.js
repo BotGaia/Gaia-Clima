@@ -1,7 +1,4 @@
-const mongoose = require('mongoose');
-const Weather = require('../models/Weather');
-const requestWeather = require('../requests/requestWeather');
-const SportSchema = require('../db/sportSchema');
+const mongoose = require('mongoose'); const SportSchema = require('../db/sportSchema');
 
 const SportModel = mongoose.model('SportModel', SportSchema);
 

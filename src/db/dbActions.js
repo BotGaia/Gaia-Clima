@@ -4,20 +4,20 @@ const Interval = require('../models/Interval');
 module.exports = {
 
   saveAllSports() {
-    return new Promise(() => {
+    return new Promise((resolve) => {
       this.saveLol().then(() => {
         this.saveWindsurf().then(() => {
           this.saveKitesurf().then(() => {
             this.saveSurf().then(() => {
               this.saveStandUpPaddle().then(() => {
                 this.saveVela().then(() => {
-                resolve();
+                  resolve();
                 });
               });
             });
           });
         });
-      });;
+      });
     });
   },
 
@@ -52,7 +52,7 @@ module.exports = {
       sport.appendwindSpeedLimitAray(windSpeedInterval);
       windSpeedInterval = new Interval('25.7', '15.934');
       sport.appendwindSpeedLimitAray(windSpeedInterval);
-  
+
       sport.findMe().then((isFound) => {
         if (!isFound) {
           sport.saveSport().then(() => { resolve(); });
@@ -70,7 +70,7 @@ module.exports = {
       sport.appendTemperatureLimitAray(temperatureInterval);
       sport.appendHumidityLimitAray(humidityInterval);
       sport.appendwindSpeedLimitAray(windSpeedInterval);
-  
+
       sport.findMe().then((isFound) => {
         if (!isFound) {
           sport.saveSport().then(() => { resolve(); });
@@ -88,7 +88,7 @@ module.exports = {
       sport.appendTemperatureLimitAray(temperatureInterval);
       sport.appendHumidityLimitAray(humidityInterval);
       sport.appendwindSpeedLimitAray(windSpeedInterval);
-  
+
       sport.findMe().then((isFound) => {
         if (!isFound) {
           sport.saveSport().then(() => { resolve(); });
@@ -110,7 +110,7 @@ module.exports = {
       temperatureInterval = new Interval('35', '30');
       sport.appendTemperatureLimitAray(temperatureInterval);
       sport.appendwindSpeedLimitAray(windSpeedInterval);
-  
+
       sport.findMe().then((isFound) => {
         if (!isFound) {
           sport.saveSport().then(() => { resolve(); });
@@ -121,7 +121,6 @@ module.exports = {
 
   saveLol() {
     return new Promise((resolve) => {
-
       const sport = new Sport('leol');
       const temperatureInterval = new Interval('3000', '-3000');
       const humidityInterval = new Interval('3000', '-3000');
@@ -129,7 +128,7 @@ module.exports = {
       sport.appendTemperatureLimitAray(temperatureInterval);
       sport.appendHumidityLimitAray(humidityInterval);
       sport.appendwindSpeedLimitAray(windSpeedInterval);
-  
+
       sport.findMe().then((isFound) => {
         if (!isFound) {
           sport.saveSport().then(() => { resolve(); });
