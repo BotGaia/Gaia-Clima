@@ -3,4 +3,4 @@ module.exports = class Interval {
     this.upperLimit = upperLimit;
     this.lowerLimit = lowerLimit;
   }
-}
+};

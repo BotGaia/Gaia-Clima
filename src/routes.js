@@ -1,8 +1,7 @@
 const express = require('express');
 const requestWeather = require('../src/requests/requestWeather');
 const Weather = require('../src/models/Weather');
-const Sport = require('../src/models/Sport');
-const util = require("./utils/compareSportWithWeather");
+const util = require('./utils/compareSportWithWeather');
 
 const router = express.Router();
 
@@ -21,18 +20,15 @@ router.get('/request', (req, res) => {
 
 router.get('/requestSport', (req, res) => {
   util.compare(req.query.place).then((objectOfSports) => {
-    console.log("shizeee------------------")
-    console.log(objectOfSports)
     res.json(objectOfSports);
   });
-})
+});
 
 router.get('/allSports', (req, res) => {
   util.getAllSports().then((array) => {
     res.json(array);
-  })
-})
-
+  });
+});
 
 
 module.exports = app => app.use('/', router);

@@ -13,6 +13,6 @@ module.exports = class Weather {
     this.temperatureMax = treat.treatTemperature(JsonData.main.temp_max);
     this.temperatureMin = treat.treatTemperature(JsonData.main.temp_min);
     this.humidity = JsonData.main.humidity.toString();
-    //this.seaLevel = JsonData.main.seaLevel.toString();
+    // this.seaLevel = JsonData.main.seaLevel.toString();
   }
 };

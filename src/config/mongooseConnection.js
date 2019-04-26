@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const dbAction = require("../db/dbActions")
+const dbAction = require('../db/dbActions');
 
 module.exports = {
   connect: () => {

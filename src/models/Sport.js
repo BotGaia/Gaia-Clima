@@ -22,8 +22,6 @@ module.exports = class Sport {
 
   appendTemperatureLimitAray(interval) {
     this.sport.temperature.limitArray.push(interval);
-    console.log("sopir a asasd")
-    console.log(this.sport.temperature.limitArray)
   }
 
   appendHumidityLimitAray(interval) {
@@ -34,28 +32,6 @@ module.exports = class Sport {
     this.sport.windSpeed.limitArray.push(interval);
   }
 
-  // buildSport(temperatureUpperLimit, temperatureLowerLimit, humidityUpperLimit, humidityLowerLimit, windSpeedUpperLimit, windSpeedLowerLimit) {
-  //   const builtSport = new SportModel({
-  //     name: this.sport.name,
-  //     class: 'sport',
-  //     temperature: {
-  //       upperLimit: temperatureUpperLimit,
-  //       lowerLimit: temperatureLowerLimit,
-  //     },
-  //     humidity: {
-  //       upperLimit: humidityUpperLimit,
-  //       lowerLimit: humidityLowerLimit,
-  //     },
-  //     windSpeed: {
-  //       upperLimit: windSpeedUpperLimit,
-  //       lowerLimit: windSpeedLowerLimit,
-  //     },
-  //   });
-
-  //   this.sport = builtSport;
-  // }
-
-
   getSport() {
     return this.sport;
   }
@@ -64,7 +40,7 @@ module.exports = class Sport {
     return new Promise((resolve) => {
       this.sport.save().then(() => {
         resolve();
-      })
+      });
     });
   }
 
@@ -76,20 +52,20 @@ module.exports = class Sport {
         } else {
           resolve();
         }
-      })
-    })
+      });
+    });
   }
 
   findMe() {
     return new Promise((resolve) => {
       SportModel.findOne({ name: this.sport.name },
         (err) => { if (err) { resolve(false); } }).then((sport) => {
-          if (sport) {
-            this.sport = sport;
-            resolve(true);
-          }
-          resolve(false);
-        });
+        if (sport) {
+          this.sport = sport;
+          resolve(true);
+        }
+        resolve(false);
+      });
     });
   }
-}
+};
