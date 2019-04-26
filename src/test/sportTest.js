@@ -25,13 +25,3 @@ describe('Test Sport class', () => {
     sport.getSport().temperature.limitArray.length.should.be.equal(1);
   });
 });
-
-describe('Compare sport with weather', () => {
-  it('should return true', () => {
-    const sport = new Sport('sport');
-    const interval = new Interval('3', '1');
-    sport.appendTemperatureLimitAray(interval);
-    const fakeWeather = { temperature: 2 };
-    compare.compareTemperature(sport.getSport(), fakeWeather).should.be.equal(true);
-  });
-});
