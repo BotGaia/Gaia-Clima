@@ -9,40 +9,51 @@ module.exports = class Sport {
       name,
       class: 'sport',
       temperature: {
-        upperLimit: '',
-        lowerLimit: '',
+        limitArray: [],
       },
       humidity: {
-        upperLimit: '',
-        lowerLimit: '',
+        limitArray: [],
       },
       windSpeed: {
-        upperLimit: '',
-        lowerLimit: '',
+        limitArray: [],
       },
     });
   }
 
-  buildSport(temperatureUpperLimit, temperatureLowerLimit, humidityUpperLimit, humidityLowerLimit, windSpeedUpperLimit, windSpeedLowerLimit) {
-    const builtSport = new SportModel({
-      name: this.sport.name,
-      class: 'sport',
-      temperature: {
-        upperLimit: temperatureUpperLimit,
-        lowerLimit: temperatureLowerLimit,
-      },
-      humidity: {
-        upperLimit: humidityUpperLimit,
-        lowerLimit: humidityLowerLimit,
-      },
-      windSpeed: {
-        upperLimit: windSpeedUpperLimit,
-        lowerLimit: windSpeedLowerLimit,
-      },
-    });
-
-    this.sport = builtSport;
+  appendTemperatureLimitAray(interval) {
+    this.sport.temperature.limitArray.push(interval);
+    console.log("sopir a asasd")
+    console.log(this.sport.temperature.limitArray)
   }
+
+  appendHumidityLimitAray(interval) {
+    this.sport.humidity.limitArray.push(interval);
+  }
+
+  appendwindSpeedLimitAray(interval) {
+    this.sport.windSpeed.limitArray.push(interval);
+  }
+
+  // buildSport(temperatureUpperLimit, temperatureLowerLimit, humidityUpperLimit, humidityLowerLimit, windSpeedUpperLimit, windSpeedLowerLimit) {
+  //   const builtSport = new SportModel({
+  //     name: this.sport.name,
+  //     class: 'sport',
+  //     temperature: {
+  //       upperLimit: temperatureUpperLimit,
+  //       lowerLimit: temperatureLowerLimit,
+  //     },
+  //     humidity: {
+  //       upperLimit: humidityUpperLimit,
+  //       lowerLimit: humidityLowerLimit,
+  //     },
+  //     windSpeed: {
+  //       upperLimit: windSpeedUpperLimit,
+  //       lowerLimit: windSpeedLowerLimit,
+  //     },
+  //   });
+
+  //   this.sport = builtSport;
+  // }
 
 
   getSport() {

@@ -25,17 +25,13 @@ module.exports = {
         let count=0;
         let objectOfSports = { favorable: [], reservation: [], alert: [] };
         for (let i = 0; i < array.length; i++) {
-            console.log("array================="+array[i])
             if (this.compareTemperature(array[i], weather)) {
-            console.log("fuckonashize-----------------------r")
                 count++;
             }
             if (this.compareHumidity(array[i], weather)) {
-                console.log("fuckonashize-----------------------r")
                 count++;
             }
             if (this.compareWindSpeed(array[i], weather)) {
-                console.log("fuckonashize-----------------------r")
                 count++;
             }
             if (count == 3) {
@@ -49,9 +45,8 @@ module.exports = {
         }
         return objectOfSports;
     },
-
+    
     getAllSports() {
-        mongooseConnection.connect();
         return new Promise((resolve) => {
             SportModel.find({ class: 'sport' }).then((array) => {
                 resolve(array);
@@ -59,7 +54,7 @@ module.exports = {
             });
         })
     },
-
+    
     getClima(place) {
         return new Promise((resolve) => {
             requestWeather.getLocal(place).then((coordsJson) => {
@@ -74,32 +69,39 @@ module.exports = {
             });
         });
     },
-
+    
     compareTemperature: (sport, weather) => {
-        if (parseFloat(weather.temperature) >= parseFloat(sport.temperature.lowerLimit) && parseFloat(weather.temperature) <= parseFloat(sport.temperature.upperLimit)) {
-            console.log("fuckonashize-----------------------r")
-            return true;
-        }
-        else {
-            return false;
-        }
-    },
 
+        // console.log(weather.temperature+"-==============------------"+parseFloat(sport.temperature.limitArray[0].lowerLimit))
+        
+        for(let i=0; i<sport.temperature.limitArray.length; i++) {
+            console.log('shizeeassasaee'+sport.temperature.limitArray[i].lowerLimit)
+            if (parseFloat(weather.temperature) >= parseFloat(sport.temperature.limitArray[i].lowerLimit) && parseFloat(weather.temperature) <= parseFloat(sport.temperature.limitArray[i].upperLimit)) {
+                return true;
+            }
+        }
+        return false;
+    },
+    
     compareHumidity: (sport, weather) => {
-        if (parseFloat(weather.humidity) >= parseFloat(sport.humidity.lowerLimit) && parseFloat(weather.humidity) <= parseFloat(sport.humidity.upperLimit)) {
-            return true;
+        
+        for(let i=0; i<sport.humidity.limitArray.length; i++) {
+            if (parseFloat(weather.humidity) >= parseFloat(sport.humidity.limitArray[i].lowerLimit) && parseFloat(weather.humidity) <= parseFloat(sport.humidity.limitArray[i].upperLimit)) {
+                return true;
+            }
         }
-        else {
-            return false;
+        return false;
+    },
+    
+    
+    compareWindSpeed: (sport, weather) => {
+
+        for(let i=0; i<sport.windSpeed.limitArray.length; i++) {
+            if (parseFloat(weather.windySpeed) >= parseFloat(sport.windSpeed.limitArray[i].lowerLimit) && parseFloat(weather.windySpeed) <= parseFloat(sport.windSpeed.limitArray[i].upperLimit)) {
+                return true;
+            }
         }
+        return false;
     },
 
-    compareWindSpeed: (sport, weather) => {
-        if (parseFloat(weather.windySpeed) >= parseFloat(sport.windSpeed.lowerLimit) && parseFloat(weather.windySpeed) <= parseFloat(sport.windSpeed.upperLimit)) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    },
 }

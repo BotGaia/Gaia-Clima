@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const dbAction = require("../db/dbActions")
 
 module.exports = {
   connect: () => {
@@ -16,6 +17,7 @@ module.exports = {
     };
 
     mongoose.connect('mongodb://mongo:27018/gaiaclima', options).then(() => {
+      dbAction.saveAllSports();
     }).catch();
   },
 };
