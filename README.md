@@ -42,13 +42,28 @@ Para rodar a folha de estilo, utilize este comando:
 
 ``` $ sudo docker-compose run gaiaclima /bin/sh -c "cd /app; npm i; npm run lint" ```
 
+
 ### Endpoints
 <table>
 	<tr>
 		<td>GET</td>
-		<td>localhost:3000/request?place={VALOR}</td>
+		<td>localhost:3000/climate?place={VALOR}</td>
 		<td>place</td>
 		<td>string</td>
 		<td>Recebe informação a respeito do clima no local informado</td>
+	</tr>
+	<tr>
+		<td>GET</td>
+		<td>localhost:3000/sports?place={VALOR}</td>
+		<td>place</td>
+		<td>string</td>
+		<td>Recebe esportes recomendados favoraveis, com ressalva e com alerta</td>
+	</tr>
+	<tr>
+		<td>GET</td>
+		<td>localhost:3000/allSports</td>
+		<td>-</td>
+		<td>-</td>
+		<td>Recebe todos os esportes presentes no banco de dados</td>
 	</tr>
 </table>

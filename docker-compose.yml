@@ -19,10 +19,6 @@ services:
   
   mongo:
     image: aashreys/mongo-auth:latest
-    environment:
-      - AUTH=yes
-      - MONGODB_ADMIN_USER=gaiaclima
-      - MONGODB_ADMIN_PASS=admin123
     command: mongod --port 27018
     ports: 
       - 27018:27018
