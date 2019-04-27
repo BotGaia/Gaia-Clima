@@ -16,11 +16,19 @@ module.exports = {
       useNewUrlParser: true,
     };
 
-    mongoose.connect('mongodb://mongo:27018/gaiaclima', options).then(() => {
-      dbAction.saveAllSports().then(() => {
-        resolve();
-      });
-    }).catch();
+    if (process.env.ENVIRONMENT === 'dev') {
+      mongoose.connect('mongodb://mongo:27018/gaiaclima', options).then(() => {
+        dbAction.saveAllSports().then(() => {
+          resolve();
+        });
+      }).catch();
+    } else if (process.env.ENVIRONMENT === 'homolog') {
+      mongoose.connect(`mongodb://${process.env.USER_DB}:${process.env.PASS_DB}@68.183.43.29:32756/${process.env.DB}`,
+        { useNewUrlParser: true }).then(() => {
+        dbAction.saveAllSports().then(() => {
+          resolve();
+        });
+      }).catch();
+    }
   }),
-
 };
