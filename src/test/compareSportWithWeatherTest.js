@@ -11,12 +11,12 @@ const Sport = require('../models/Sport');
 const Interval = require('../models/Interval');
 
 
-const fakeWeather = { temperature: 2.0, humidity: 2.0, windyspeed: 2.0 };
+const fakeWeather = { temperature: -20000, humidity: -20000, windyspeed: -20000 };
 
 describe('Compare something', () => {
   it('should be equal or not', () => {
-    const sport = new Sport('sport');
-    const interval = new Interval('3', '1');
+    const sport = new Sport('sportTest');
+    const interval = new Interval('-10000', '-30000');
     sport.appendTemperatureLimitAray(interval);
     const tof = compare.compareTemperature(sport.getSport(), fakeWeather);
     tof.should.be.equal(true);
