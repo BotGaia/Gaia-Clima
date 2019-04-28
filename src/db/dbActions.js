@@ -22,22 +22,26 @@ module.exports = {
   },
 
   saveWindsurf() {
-    const sport = new Sport('Windsurf');
-    let temperatureInterval = new Interval('24', '20');
-    sport.appendTemperatureLimitAray(temperatureInterval);
-    temperatureInterval = new Interval('35', '30');
-    sport.appendTemperatureLimitAray(temperatureInterval);
-    const humidityInterval = new Interval('70', '21');
-    sport.appendHumidityLimitAray(humidityInterval);
-    let windSpeedInterval = new Interval('15.42', '10.794');
-    sport.appendwindSpeedLimitAray(windSpeedInterval);
-    windSpeedInterval = new Interval('25.7', '21.074');
-    sport.appendwindSpeedLimitAray(windSpeedInterval);
+    return new Promise((resolve) => {
+      const sport = new Sport('Windsurf');
+      let temperatureInterval = new Interval('24', '20');
+      sport.appendTemperatureLimitAray(temperatureInterval);
+      temperatureInterval = new Interval('35', '30');
+      sport.appendTemperatureLimitAray(temperatureInterval);
+      const humidityInterval = new Interval('70', '21');
+      sport.appendHumidityLimitAray(humidityInterval);
+      let windSpeedInterval = new Interval('15.42', '10.794');
+      sport.appendwindSpeedLimitAray(windSpeedInterval);
+      windSpeedInterval = new Interval('25.7', '21.074');
+      sport.appendwindSpeedLimitAray(windSpeedInterval);
 
-    sport.findMe().then((isFound) => {
-      if (!isFound) {
-        sport.saveSport();
-      }
+      sport.findMe().then((isFound) => {
+        if (!isFound) {
+          sport.saveSport().then(() => { resolve(); });
+        } else {
+          resolve();
+        }
+      });
     });
   },
 
@@ -56,6 +60,8 @@ module.exports = {
       sport.findMe().then((isFound) => {
         if (!isFound) {
           sport.saveSport().then(() => { resolve(); });
+        } else {
+          resolve();
         }
       });
     });
@@ -74,6 +80,8 @@ module.exports = {
       sport.findMe().then((isFound) => {
         if (!isFound) {
           sport.saveSport().then(() => { resolve(); });
+        } else {
+          resolve();
         }
       });
     });
@@ -92,6 +100,8 @@ module.exports = {
       sport.findMe().then((isFound) => {
         if (!isFound) {
           sport.saveSport().then(() => { resolve(); });
+        } else {
+          resolve();
         }
       });
     });
@@ -114,6 +124,8 @@ module.exports = {
       sport.findMe().then((isFound) => {
         if (!isFound) {
           sport.saveSport().then(() => { resolve(); });
+        } else {
+          resolve();
         }
       });
     });
@@ -132,6 +144,8 @@ module.exports = {
       sport.findMe().then((isFound) => {
         if (!isFound) {
           sport.saveSport().then(() => { resolve(); });
+        } else {
+          resolve();
         }
       });
     });
