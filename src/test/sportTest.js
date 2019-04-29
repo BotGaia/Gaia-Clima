@@ -4,6 +4,7 @@
 const chai = require('chai');
 const Sport = require('../models/Sport');
 const Interval = require('../models/Interval');
+const compare = require('../utils/compareSportWithWeather');
 const mongooseConnection = require('../config/mongooseConnection');
 
 const should = chai.should();
@@ -20,8 +21,8 @@ describe('Validate database', () => {
 describe('Test Sport class', () => {
   it('Should create a sport named sport with temperature.limitArray of lenght 1', () => {
     mongooseConnection.connect().then(() => {
-      const sport = new Sport('sportTest3');
-      const interval = new Interval('-10000', '-10000');
+      const sport = new Sport('sport');
+      const interval = new Interval('1', '1');
       sport.appendTemperatureLimitAray(interval);
       sport.getSport().temperature.limitArray.length.should.be.equal(1);
     });
