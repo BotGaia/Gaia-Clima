@@ -133,10 +133,10 @@ module.exports = {
 
   saveLol() {
     return new Promise((resolve) => {
-      const sport = new Sport('leol');
-      const temperatureInterval = new Interval('3000', '-3000');
-      const humidityInterval = new Interval('3000', '-3000');
-      const windSpeedInterval = new Interval('3000', '-3000');
+      const sport = new Sport('sportTest2');
+      const temperatureInterval = new Interval('3000', '3000');
+      const humidityInterval = new Interval('3000', '3000');
+      const windSpeedInterval = new Interval('3000', '3000');
       sport.appendTemperatureLimitAray(temperatureInterval);
       sport.appendHumidityLimitAray(humidityInterval);
       sport.appendwindSpeedLimitAray(windSpeedInterval);

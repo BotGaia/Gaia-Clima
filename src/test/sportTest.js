@@ -11,7 +11,7 @@ const should = chai.should();
 
 describe('Validate database', () => {
   it('shoud have sports saved', (done) => {
-    new Sport('leol').findMe().then((isFound) => {
+    new Sport('sportTest2').findMe().then((isFound) => {
       isFound.should.be.equal(true);
       done();
     });
