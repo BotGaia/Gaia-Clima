@@ -10,7 +10,7 @@ const mongooseConnection = require('../config/mongooseConnection');
 const should = chai.should();
 
 describe('Validate database', () => {
-  it('shoud have sports saved', (done) => {
+  it('should have sports saved', (done) => {
     new Sport('sportTest2').findMe().then((isFound) => {
       isFound.should.be.equal(true);
       done();
@@ -19,7 +19,7 @@ describe('Validate database', () => {
 });
 
 describe('Test Sport class', () => {
-  it('Should create a sport named sport with temperature.limitArray of lenght 1', () => {
+  it('should create a sport named sport with temperature.limitArray of length 1', () => {
     mongooseConnection.connect().then(() => {
       const sport = new Sport('sport');
       const interval = new Interval('1', '1');

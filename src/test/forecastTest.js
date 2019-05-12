@@ -9,7 +9,7 @@ const should = chai.should();
 
 chai.use(chaiHttp);
 
-describe('GET forecast', () => {
+describe('GET FORECAST', () => {
   it('should get a list of weather objects', (done) => {
     const getLocalResponse = JSON.parse('{"lat":"-10.3333333","lng":"-53.2"}');
 
@@ -19,9 +19,7 @@ describe('GET forecast', () => {
       done();
     });
   }).timeout(5000);
-});
 
-describe('Invalid or missing parameter', () => {
   it('should return a 400 error', (done) => {
     const getLocalResponse = JSON.parse('{}');
 
@@ -31,9 +29,7 @@ describe('Invalid or missing parameter', () => {
       done();
     });
   }).timeout(5000);
-});
 
-describe('Unexisting location', () => {
   it('should return a 400 error', (done) => {
     const getLocalResponse = JSON.parse('{"lat":"error","lng":"error"}');
 
