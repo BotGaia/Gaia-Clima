@@ -44,8 +44,8 @@ describe('GET WEATHER', () => {
 
   it('should have name, sunrise and sunset', (done) => {
     const getLocalResponse = {
-      lat: "-10.1399415",
-      lng: "-76.2775463"
+      lat: '-10.1399415',
+      lng: '-76.2775463',
     };
 
     requestWeather.getWeather(getLocalResponse).then((weatherJson) => {

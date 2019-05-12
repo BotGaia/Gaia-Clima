@@ -22,9 +22,9 @@ router.get('/forecast', (req, res) => {
   requestWeather.getLocal(req.query.place).then((coordsJson) => {
     requestWeather.getForecast(coordsJson).then((forecastJson) => {
       if (forecastJson.cod === '200') {
-        let weatherArray = [];
+        const weatherArray = [];
 
-        forecastJson.list.map((json) => weatherArray.push(new Weather(json, 'forecast')));
+        forecastJson.list.map(json => weatherArray.push(new Weather(json, 'forecast')));
 
         res.json(weatherArray);
       } else {
