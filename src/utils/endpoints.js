@@ -10,7 +10,7 @@ module.exports = {
             type: 'string',
           },
         ],
-        description: 'Recebe um local e retorna as condições climáticas do mesmo',
+        description: 'Receives a location and return its weather conditions',
       },
       {
         type: 'GET',
@@ -21,13 +21,13 @@ module.exports = {
             type: 'string',
           },
         ],
-        description: 'Recebe um local e retorna os esportes favoráveis, com ressalva e com alerta',
+        description: 'Receives a location and returns favorable sports, sports with reservation and sports with alert for the given location',
       },
       {
         type: 'GET',
         endpoint: '/allSports',
         parameters: [],
-        description: 'Retorna todos os esportes presentes no banco de dados',
+        description: 'Returns all the sports in the database',
       },
     ];
 
