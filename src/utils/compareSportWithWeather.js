@@ -16,22 +16,12 @@ module.exports = {
     let count = 0;
     const objectOfSports = { favorable: [], reservation: [], alert: [] };
     for (let i = 0; i < array.length; i += 1) {
-      if (this.compareTemperature(array[i], weather)) {
-        count += 1;
-      }
-      if (this.compareHumidity(array[i], weather)) {
-        count += 1;
-      }
-      if (this.compareWindSpeed(array[i], weather)) {
-        count += 1;
-      }
-      if (count === 3) {
-        objectOfSports.favorable.push(array[i]);
-      } else if (count === 2) {
-        objectOfSports.reservation.push(array[i]);
-      } else if (count === 1) {
-        objectOfSports.alert.push(array[i]);
-      }
+      when (this.compareTemperature(array[i], weather)).done(count += 1);
+      when (this.compareHumidity(array[i], weather)).done(count += 1);
+      when (this.compareWindSpeed(array[i], weather)).done(count += 1);
+      when (count === 3).done( objectOfSports.favorable.push(array[i]));
+      when (count === 2).done(objectOfSports.reservation.push(array[i]));
+      when (count === 1).done(objectOfSports.alert.push(array[i]));
       count = 0;
     }
     return objectOfSports;
