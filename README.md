@@ -54,6 +54,7 @@ Aqui se encontra todos os endpoints desse serviço. Todos os endpoints se encont
 
 |Requisição|Endpoint|Parâmetro:Tipo|Descrição|
 |:--------:|:------:|:------------:|:-------:|
+|GET|/|-|Retorna todas as endpoints do microserviço.|
 |GET|/climate|place: String|Recebe um local e retorna as condições climáticas do mesmo.|
 |GET|/sports|place: String|Recebe um local e retorna os esportes favoraveis, com ressalva e com alerta.|
 |GET|/allSports|-|Recebe todos os esportes presentes no banco de dados.|
