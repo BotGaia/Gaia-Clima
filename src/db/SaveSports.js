@@ -4,20 +4,14 @@ const Interval = require('../models/Interval');
 module.exports = {
 
   saveAllSports() {
-    return new Promise((resolve) => {
-      this.saveLol().then(() => {
-        this.saveWindsurf().then(() => {
-          this.saveKitesurf().then(() => {
-            this.saveSurf().then(() => {
-              this.saveStandUpPaddle().then(() => {
-                this.saveVela().then(() => {
-                  resolve();
-                });
-              });
-            });
-          });
-        });
-      });
+    return new Promise(async (resolve) => {
+      await this.saveLol();
+      await this.saveWindsurf();
+      await this.saveKitesurf();
+      await this.saveSurf();
+      await this.saveStandUpPaddle();
+      await this.saveVela();
+      resolve();
     });
   },
 
