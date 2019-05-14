@@ -5,7 +5,7 @@ const chai = require('chai');
 const Sport = require('../models/Sport');
 const Interval = require('../models/Interval');
 const compare = require('../utils/compareSportWithWeather');
-const mongooseConnection = require('../config/mongooseConnection');
+const mongooseConnection = require('../db/config/mongooseConnection');
 
 const should = chai.should();
 
@@ -18,7 +18,7 @@ describe('Validate database', () => {
   });
 });
 
-describe('Test Sport class', () => {
+describe('Create Sport', () => {
   it('Should create a sport named sport with temperature.limitArray of lenght 1', () => {
     mongooseConnection.connect().then(() => {
       const sport = new Sport('sport');

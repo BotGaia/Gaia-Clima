@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const dbAction = require('../SaveSports');
+const saveSports = require('../SaveSports');
 
 module.exports = {
   connect: () => new Promise((resolve) => {
@@ -18,14 +18,14 @@ module.exports = {
 
     if (process.env.ENVIRONMENT === 'dev') {
       mongoose.connect('mongodb://mongo:27018/gaiaclima', options).then(() => {
-        dbAction.saveAllSports().then(() => {
+        saveSports.saveAllSports().then(() => {
           resolve();
         });
       }).catch();
     } else if (process.env.ENVIRONMENT === 'homolog') {
       mongoose.connect(`mongodb://${process.env.USER_DB}:${process.env.PASS_DB}@68.183.43.29:32756/${process.env.DB}`,
         { useNewUrlParser: true }).then(() => {
-        dbAction.saveAllSports().then(() => {
+        saveSports.saveAllSports().then(() => {
           resolve();
         });
       }).catch();
