@@ -1,4 +1,4 @@
-[![ipeline status](https://gitlab.com/botgaia/Gaia-Clima/badges/master/pipeline.svg)](https://gitlab.com/botgaia/Gaia-Clima/commits/master)
+[![pipeline status](https://gitlab.com/botgaia/Gaia-Clima/badges/master/pipeline.svg)](https://gitlab.com/botgaia/Gaia-Clima/commits/master)
 [![coverage report](https://gitlab.com/botgaia/Gaia-Clima/badges/master/coverage.svg)](https://gitlab.com/botgaia/Gaia-Clima/commits/master)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
@@ -7,6 +7,10 @@
 ## Objetivo
 
 Esse serviço é responsável por pegar o clima de um determinado local, referenciado pela longitude e latitude, da API [OpenWeatherMap](https://openweathermap.org).
+
+## Como contribuir
+
+Se tiver interesse em como contribuir para o projeto, olhe nossa [wiki](https://github.com/fga-eps-mds/2019.1-Gaia).
 
 ## Como usar
 
@@ -41,12 +45,11 @@ Após instalar o docker rode o projeto como desenvolvimento da seguinte maneira:
 
 Para rodar os testes, rode esse comando:
 
-``` $ sudo docker-compose run gaiaclima /bin/sh -c "cd /app; npm i; npm run test" ```
+``` $ sudo docker-compose run gaiaclima npm run test ```
 
 Para rodar a folha de estilo, utilize este comando:
 
-``` $ sudo docker-compose run gaiaclima /bin/sh -c "cd /app; npm i; npm run lint" ```
-
+``` $ sudo docker-compose run gaiaclima npm run lint ```
 
 ### Endpoints
 
@@ -54,6 +57,7 @@ Aqui se encontra todos os endpoints desse serviço. Todos os endpoints se encont
 
 |Requisição|Endpoint|Parâmetro:Tipo|Descrição|
 |:--------:|:------:|:------------:|:-------:|
+|GET|/|-|Retorna todas as endpoints do microserviço.|
 |GET|/climate|place: String|Recebe um local e retorna as condições climáticas do mesmo.|
 |GET|/forecast|place: String|Recebe um local e retorna quarenta previsões das condições climáticas do mesmo do período de cinco dias.|
 |GET|/sports|place: String|Recebe um local e retorna os esportes favoraveis, com ressalva e com alerta.|

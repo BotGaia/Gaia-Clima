@@ -1,14 +1,22 @@
 {
-  "name": "wendy-clima",
+  "name": "gaia-clima",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha src/test --exit",
+    "test": "nyc --reporter=text mocha src/test --exit",
     "dev": "nodemon src/index.js",
     "start": "node src/index.js",
     "lint": "npx eslint ."
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BotGaia/Gaia-Clima.git"
+  },
+  "bugs": {
+    "url": "https://github.com/BotGaia/Gaia-Clima/issues"
+  },
+  "homepage": "https://github.com/BotGaia/Gaia-Clima#readme",
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -23,6 +31,7 @@
   "devDependencies": {
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.16.0"
+    "eslint-plugin-import": "^2.16.0",
+    "nyc": "^14.1.0"
   }
 }

@@ -2,8 +2,13 @@ const express = require('express');
 const requestWeather = require('../src/requests/requestWeather');
 const Weather = require('../src/models/Weather');
 const util = require('./utils/compareSportWithWeather');
+const endpoints = require('./utils/endpoints');
 
 const router = express.Router();
+
+router.get('/', (req, res) => {
+  res.json(endpoints.getJson());
+});
 
 router.get('/climate', (req, res) => {
   requestWeather.getLocal(req.query.place).then((coordsJson) => {
