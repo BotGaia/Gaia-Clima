@@ -2,7 +2,6 @@ const mongoose = require('mongoose'); const SportSchema = require('../db/sportSc
 
 const SportModel = mongoose.model('SportModel', SportSchema);
 
-
 module.exports = {
   compare(weather) {
     return new Promise((resolve) => {
@@ -57,7 +56,6 @@ module.exports = {
     return false;
   },
 
-
   compareWindSpeed: (sport, weather) => {
     for (let i = 0; i < sport.windSpeed.limitArray.length; i += 1) {
       if (parseFloat(weather.windySpeed) >= parseFloat(sport.windSpeed.limitArray[i].lowerLimit)
@@ -67,5 +65,4 @@ module.exports = {
     }
     return false;
   },
-
 };

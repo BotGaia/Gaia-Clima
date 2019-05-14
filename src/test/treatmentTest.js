@@ -2,9 +2,9 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 const chai = require('chai');
+const treatment = require('../utils/treatmentWeather.js');
 
 const should = chai.should();
-const treatment = require('../utils/treatmentWeather.js');
 
 describe('get Temperature', () => {
   it('get Temperature', (done) => {

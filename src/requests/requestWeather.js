@@ -20,7 +20,6 @@ module.exports = {
         resp.on('data', (chunk) => {
           localData += chunk;
         });
-
         resp.on('end', () => {
           localJsonData = JSON.parse(localData);
           resolve(localJsonData);
@@ -44,7 +43,6 @@ module.exports = {
         resp.on('data', (chunk) => {
           data += chunk;
         });
-
         resp.on('end', () => {
           JsonData = JSON.parse(data);
           resolve(JsonData);

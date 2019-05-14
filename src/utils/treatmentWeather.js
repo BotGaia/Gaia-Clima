@@ -34,9 +34,7 @@ module.exports = {
   },
   treatTemperature: (temp) => {
     const kel = parseFloat(temp);
-
     const celsius = kel - 273.15;
-
     return celsius.toFixed(2).toString();
   },
   treatPressure: (pressure) => {
@@ -82,7 +80,6 @@ module.exports = {
     const points = ':';
     const minutes = zero + date.getMinutes();
     const seconds = zero + date.getSeconds();
-
     const formattedTime = hours + points + minutes.substr(-2) + points + seconds.substr(-2);
     return formattedTime.toString();
   },

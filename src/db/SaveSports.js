@@ -5,7 +5,7 @@ module.exports = {
 
   saveAllSports() {
     return new Promise(async (resolve) => {
-      await this.saveLol();
+      await this.saveSportTest();
       await this.saveWindsurf();
       await this.saveKitesurf();
       await this.saveSurf();
@@ -125,7 +125,7 @@ module.exports = {
     });
   },
 
-  saveLol() {
+  saveSportTest() {
     return new Promise((resolve) => {
       const sport = new Sport('sportTest2');
       const temperatureInterval = new Interval('3000', '3000');
