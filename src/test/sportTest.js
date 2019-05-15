@@ -10,7 +10,7 @@ const mongooseConnection = require('../db/config/mongooseConnection');
 const should = chai.should();
 
 describe('Validate database', () => {
-  it('shoud have sports saved', (done) => {
+  it('should have sports saved', (done) => {
     new Sport('sportTest2').findMe().then((isFound) => {
       isFound.should.be.equal(true);
       done();

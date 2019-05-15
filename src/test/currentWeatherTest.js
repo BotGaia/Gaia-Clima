@@ -6,10 +6,11 @@ const should = chai.should();
 const chaiHttp = require('chai-http');
 const app = require('../index');
 const requestWeather = require('../requests/requestWeather');
+const Weather = require('../models/Weather');
 
 chai.use(chaiHttp);
 
-describe('GET weather', () => {
+describe('GET WEATHER', () => {
   it('should get a weather object', (done) => {
     const getLocalResponse = JSON.parse('{"lat":"-10.3333333","lng":"-53.2"}');
 
@@ -19,9 +20,7 @@ describe('GET weather', () => {
       done();
     });
   }).timeout(5000);
-});
 
-describe('Invalid or missing parameter', () => {
   it('should return a 400 error', (done) => {
     const getLocalResponse = JSON.parse('{}');
 
@@ -31,9 +30,7 @@ describe('Invalid or missing parameter', () => {
       done();
     });
   }).timeout(5000);
-});
 
-describe('Unexisting location', () => {
   it('should return a 400 error', (done) => {
     const getLocalResponse = JSON.parse('{"lat":"error","lng":"error"}');
 
@@ -42,5 +39,22 @@ describe('Unexisting location', () => {
       weatherJson.should.have.property('cod').eql('400');
       done();
     });
+  }).timeout(5000);
+
+  it('should have name, sunrise and sunset', (done) => {
+    const getLocalResponse = {
+      lat: '-10.1399415',
+      lng: '-76.2775463',
+    };
+
+    requestWeather.getWeather(getLocalResponse).then((weatherJson) => {
+      const weather = new Weather(weatherJson, 'weather');
+
+      weather.should.be.a('Object');
+      weather.should.have.property('name');
+      weather.should.have.property('sunrise');
+      weather.should.have.property('sunset');
+    });
+    done();
   }).timeout(5000);
 });

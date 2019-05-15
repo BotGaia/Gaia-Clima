@@ -26,6 +26,7 @@ testCheck:
   stage: test
   script:
     - docker-compose run gaiaclima /bin/sh -c "cd /app; npm i; npm run test"
+  coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
 
 staticAnalysis:
   stage: quality
