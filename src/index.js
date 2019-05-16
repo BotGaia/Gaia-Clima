@@ -1,7 +1,7 @@
 /* eslint-disable import/no-unresolved */
 const express = require('express');
 const bodyParser = require('body-parser');
-const mongooseConnection = require('../src/db/config/mongooseConnection');
+const mongooseConnection = require('../src/config/mongooseConnection');
 
 const app = express();
 
