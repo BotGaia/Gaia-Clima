@@ -47,9 +47,9 @@ module.exports = {
 
   compareTemperature: (sport, weather) => {
     for (let i = 0; i < sport.temperature.length; i += 1) {
-      if (parseFloat(weather.temperature) >= parseFloat(sport.temperature[i].intervals.lowerLimit)
+      if (parseFloat(weather.temperature) >= parseFloat(sport.temperature[i].lowerLimit)
       && parseFloat(weather.temperature)
-      <= parseFloat(sport.temperature[i].intervals.upperLimit)) {
+      <= parseFloat(sport.temperature[i].upperLimit)) {
         return true;
       }
     }
@@ -58,8 +58,8 @@ module.exports = {
 
   compareHumidity: (sport, weather) => {
     for (let i = 0; i < sport.humidity.length; i += 1) {
-      if (parseFloat(weather.humidity) >= parseFloat(sport.humidity[i].intervals.lowerLimit)
-      && parseFloat(weather.humidity) <= parseFloat(sport.humidity[i].intervals.upperLimit)) {
+      if (parseFloat(weather.humidity) >= parseFloat(sport.humidity[i].lowerLimit)
+      && parseFloat(weather.humidity) <= parseFloat(sport.humidity[i].upperLimit)) {
         return true;
       }
     }
@@ -68,8 +68,8 @@ module.exports = {
 
   compareWindSpeed: (sport, weather) => {
     for (let i = 0; i < sport.windSpeed.length; i += 1) {
-      if (parseFloat(weather.windySpeed) >= parseFloat(sport.windSpeed[i].intervals.lowerLimit)
-      && parseFloat(weather.windySpeed) <= parseFloat(sport.windSpeed[i].intervals.upperLimit)) {
+      if (parseFloat(weather.windySpeed) >= parseFloat(sport.windSpeed[i].lowerLimit)
+      && parseFloat(weather.windySpeed) <= parseFloat(sport.windSpeed[i].upperLimit)) {
         return true;
       }
     }
