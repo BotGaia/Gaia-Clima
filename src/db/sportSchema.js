@@ -4,14 +4,23 @@ const SportSchema = new mongoose.Schema({
   name: String,
   class: String,
   temperature: {
-    limitArray: Array,
+    type: Array,
+    intervals: {
+      type: Object
+    }, 
   },
-  humidity: {
-    limitArray: Array,
+  humidity:{ 
+    type: Array,
+    intervals: {
+      type: Object
+    }, 
   },
   windSpeed: {
-    limitArray: Array,
-  },
+    type: Array,
+    intervals: {
+      type: Object
+    }, 
+  }
 });
 
 module.exports = SportSchema;

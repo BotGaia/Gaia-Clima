@@ -9,27 +9,27 @@ module.exports = class Sport {
       name,
       class: 'sport',
       temperature: [{
-        limitArray: [],
+        intervals: {},
       }],
       humidity: [{
-        limitArray: [],
+        intervals: {},
       }],
       windSpeed: [{
-        limitArray: [],
+        intervals: {},
       }],
     });
   }
 
   appendTemperatureLimitAray(interval) {
-    this.sport.temperature.limitArray.push(interval);
+    this.sport.temperature.push(interval);
   }
 
   appendHumidityLimitAray(interval) {
-    this.sport.humidity.limitArray.push(interval);
+    this.sport.humidity.push(interval);
   }
 
-  appendwindSpeedLimitAray(interval) {
-    this.sport.windSpeed.limitArray.push(interval);
+  appendwindSpeedLimitAray(interval, i) {
+    this.sport.windSpeed.push(interval);
   }
 
   getSport() {

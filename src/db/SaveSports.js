@@ -5,12 +5,12 @@ module.exports = {
 
   saveAllSports() {
     return new Promise(async (resolve) => {
-      await this.saveSportTest();
+      //await this.saveSportTest();
       await this.saveWindsurf();
-      await this.saveKitesurf();
+      /*await this.saveKitesurf();
       await this.saveSurf();
       await this.saveStandUpPaddle();
-      await this.saveVela();
+      await this.saveVela();*/
       resolve();
     });
   },
@@ -19,15 +19,15 @@ module.exports = {
     return new Promise((resolve) => {
       const sport = new Sport('Windsurf');
       let temperatureInterval = new Interval('24', '20');
-      sport.appendTemperatureLimitAray(temperatureInterval);
+      sport.appendTemperatureLimitAray(temperatureInterval, 0);
       temperatureInterval = new Interval('35', '30');
-      sport.appendTemperatureLimitAray(temperatureInterval);
+      sport.appendTemperatureLimitAray(temperatureInterval, 1);
       const humidityInterval = new Interval('70', '21');
-      sport.appendHumidityLimitAray(humidityInterval);
+      sport.appendHumidityLimitAray(humidityInterval, 0);
       let windSpeedInterval = new Interval('15.42', '10.794');
-      sport.appendwindSpeedLimitAray(windSpeedInterval);
+      sport.appendwindSpeedLimitAray(windSpeedInterval, 0);
       windSpeedInterval = new Interval('25.7', '21.074');
-      sport.appendwindSpeedLimitAray(windSpeedInterval);
+      sport.appendwindSpeedLimitAray(windSpeedInterval, 1);
 
       sport.findMe().then((isFound) => {
         if (!isFound) {
@@ -38,7 +38,7 @@ module.exports = {
       });
     });
   },
-
+/*
   saveKitesurf() {
     return new Promise((resolve) => {
       const sport = new Sport('Kitesurf');
@@ -172,5 +172,5 @@ module.exports = {
         process.exit();
       }
     });
-  },
+  },*/
 };
