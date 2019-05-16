@@ -1,34 +1,35 @@
 module.exports = {
   treatSky: (sky) => {
-    if (sky === 'clear sky') {
-      return ('céu limpo');
-    }
-    if (sky === 'few clouds') {
-      return ('poucas nuvens');
-    }
-    if (sky === 'broken clouds') {
-      return ('céu parcialmente nublado');
-    }
-    if (sky === 'scattered clouds') {
-      return ('nuvens dispersas');
-    }
-    if (sky === 'moderate rain') {
-      return ('chuva moderada');
-    }
-    if (sky === 'light rain') {
-      return ('leve chuva');
-    }
-    if (sky === 'overcast clouds') {
-      return ('céu nublado');
-    }
-    if (sky === 'light intensity') {
-      return ('sol forte');
-    }
-    if (sky === 'shower rain') {
-      return ('chuva intensa');
-    }
-    if (sky === 'heavy snow') {
-      return ('neve intensa');
+    switch (sky) {
+      case 'clear sky':
+        return ('céu limpo');
+
+      case 'few clouds':
+        return ('poucas nuvens');
+
+      case 'broken clouds':
+        return ('céu parcialmente nublado');
+
+      case 'scattered clouds':
+        return ('nuvens dispersas');
+
+      case 'moderate rain':
+        return ('chuva moderada');
+
+      case 'light rain':
+        return ('leve chuva');
+
+      case 'overcast clouds':
+        return ('céu nublado');
+
+      case 'light intensity':
+        return ('sol forte');
+
+      case 'shower rain':
+        return ('chuva intensa');
+
+      case 'heavy snow':
+        return ('neve intensa');
     }
     return ('');
   },

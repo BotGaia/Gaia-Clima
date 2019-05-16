@@ -8,15 +8,9 @@ module.exports = class Sport {
     this.sport = new SportModel({
       name,
       class: 'sport',
-      temperature: [{
-        intervals: {},
-      }],
-      humidity: [{
-        intervals: {},
-      }],
-      windSpeed: [{
-        intervals: {},
-      }],
+      temperature: [],
+      humidity: [],
+      windSpeed: [],
     });
   }
 
