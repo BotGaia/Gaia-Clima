@@ -19,15 +19,15 @@ module.exports = {
     return new Promise((resolve) => {
       const sport = new Sport('Windsurf');
       let temperatureInterval = new Interval('24', '20');
-      sport.appendTemperatureLimitAray(temperatureInterval, 0);
+      sport.appendTemperatureLimitAray(temperatureInterval);
       temperatureInterval = new Interval('35', '30');
-      sport.appendTemperatureLimitAray(temperatureInterval, 1);
+      sport.appendTemperatureLimitAray(temperatureInterval);
       const humidityInterval = new Interval('70', '21');
-      sport.appendHumidityLimitAray(humidityInterval, 0);
+      sport.appendHumidityLimitAray(humidityInterval);
       let windSpeedInterval = new Interval('15.42', '10.794');
-      sport.appendwindSpeedLimitAray(windSpeedInterval, 0);
+      sport.appendwindSpeedLimitAray(windSpeedInterval);
       windSpeedInterval = new Interval('25.7', '21.074');
-      sport.appendwindSpeedLimitAray(windSpeedInterval, 1);
+      sport.appendwindSpeedLimitAray(windSpeedInterval);
 
       sport.findMe().then((isFound) => {
         if (!isFound) {

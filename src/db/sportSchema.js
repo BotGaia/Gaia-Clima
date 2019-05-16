@@ -6,19 +6,26 @@ const SportSchema = new mongoose.Schema({
   temperature: {
     type: Array,
     intervals: {
-      type: Object
+      type: Object,
+      upperLimit: String,
+      lowerLimit: String
+      
     }, 
   },
   humidity:{ 
     type: Array,
     intervals: {
-      type: Object
+      type: Object,
+      upperLimit: String,
+      lowerLimit: String
     }, 
   },
   windSpeed: {
     type: Array,
     intervals: {
-      type: Object
+      type: Object,
+      upperLimit: String,
+      lowerLimit: String
     }, 
   }
 });
