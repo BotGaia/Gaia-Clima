@@ -30,8 +30,10 @@ module.exports = {
 
       case 'heavy snow':
         return ('neve intensa');
+
+      default:
+        return ('');
     }
-    return ('');
   },
   treatTemperature: (temp) => {
     const kel = parseFloat(temp);

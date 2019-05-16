@@ -34,7 +34,7 @@ module.exports = {
       count = 0;
     }
     return objectOfSports;
-  },  
+  },
 
   getAllSports() {
     return new Promise((resolve) => {

@@ -5,7 +5,7 @@ const SportSchema = new mongoose.Schema({
   class: String,
   temperature: Array,
   humidity: Array,
-  windSpeed: Array
+  windSpeed: Array,
 });
 
 module.exports = SportSchema;

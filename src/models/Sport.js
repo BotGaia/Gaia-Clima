@@ -14,15 +14,15 @@ module.exports = class Sport {
     });
   }
 
-  appendTemperatureLimitAray(interval) {
+  appendTemperatureInterval(interval) {
     this.sport.temperature.push(interval);
   }
 
-  appendHumidityLimitAray(interval) {
+  appendHumidityInterval(interval) {
     this.sport.humidity.push(interval);
   }
 
-  appendwindSpeedLimitAray(interval) {
+  appendwindSpeedInterval(interval) {
     this.sport.windSpeed.push(interval);
   }
 

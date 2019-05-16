@@ -18,24 +18,35 @@ describe('Validate database', () => {
   });
 });
 
-describe('Create Sport', () => {
+describe('Create Sport with temperature condition', () => {
   it('Should create a sport named sport with temperature of length 1', () => {
     mongooseConnection.connect().then(() => {
       const sport = new Sport('sport');
       const interval = new Interval('1', '1');
-      sport.appendTemperatureLimitAray(interval);
+      sport.appendTemperatureInterval(interval);
       sport.getSport().temperature.length.should.be.equal(1);
     });
   });
 });
 
-describe('Adding Interval', () => {
-  it('Should add an interval of temperature with length 2', () => {
+describe('Create Sport with humidity condition', () => {
+  it('Should create a sport named sport with humidity of length 1', () => {
     mongooseConnection.connect().then(() => {
       const sport = new Sport('sport');
       const interval = new Interval('1', '1');
-      sport.appendTemperatureLimitAray(interval);
-      sport.getSport().temperature.intervals.size().should.be.equal(2);
+      sport.appendHumidityInterval(interval);
+      sport.getSport().humidity.length.should.be.equal(1);
+    });
+  });
+});
+
+describe('Create Sport with windy speed condition', () => {
+  it('Should create a sport named sport with wind speed of length 1', () => {
+    mongooseConnection.connect().then(() => {
+      const sport = new Sport('sport');
+      const interval = new Interval('1', '1');
+      sport.appendWindSpeedInterval(interval);
+      sport.getSport().temperature.length.should.be.equal(1);
     });
   });
 });

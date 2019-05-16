@@ -2,12 +2,12 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 const chai = require('chai');
-const should = chai.should();
 const chaiHttp = require('chai-http');
 const app = require('../index');
 const requestWeather = require('../requests/requestWeather');
 const Weather = require('../models/Weather');
 
+const should = chai.should();
 chai.use(chaiHttp);
 
 describe('GET WEATHER', () => {
