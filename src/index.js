@@ -2,11 +2,14 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongooseConnection = require('./config/mongooseConnection');
+const endpoint = require('./config/endpoint');
 
 const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+endpoint.configLocal();
 
 mongooseConnection.connect();
 
