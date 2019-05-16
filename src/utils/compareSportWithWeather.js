@@ -46,6 +46,13 @@ module.exports = {
     });
   },
 
+  compareWeather: (sport, weather) => {
+    if (this.compareHumidity(sport, weather) && this.compareTemperature(sport, weather) && this.compareWindSpeed(sport, weather)) {
+      return true;
+    } else {
+      return false;
+    }
+  },
   compareTemperature: (sport, weather) => {
     for (let i = 0; i < sport.temperature.limitArray.length; i += 1) {
       if (parseFloat(weather.temperature) >= parseFloat(sport.temperature.limitArray[i].lowerLimit)
