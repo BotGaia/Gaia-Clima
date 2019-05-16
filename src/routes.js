@@ -50,7 +50,7 @@ router.get('/climateForecast', (req, res) => {
 
         res.json(hourlyForecast.getHourlyForecast(weatherArray, req.query.hours, req.query.day, req.query.month, req.query.year));
 
-        
+
       } else {
         res.json(forecastJson.list);
       }
@@ -59,26 +59,34 @@ router.get('/climateForecast', (req, res) => {
 });
 
 router.get('/sportForecast', (req, res) => {
-  requestWeather.getLocal(req.query.place).then((coordsJson) => {
-    requestWeather.getForecast(coordsJson).then((forecastJson) => {
-      if (forecastJson.cod === '200') {
-        const weatherArray = [];
+  
+  const resultArray = new Array();
 
-        forecastJson.list.map(json => weatherArray.push(new Weather(json, 'forecast')));
+  req.query.locals.forEach((local) => {
+    requestWeather.getLocal(local).then((coordsJson) => {
+      requestWeather.getForecast(coordsJson).then((forecastJson) => {
+        if (forecastJson.cod === '200') {
+          const weatherArray = [];
 
-        const weather = hourlyForecast.getHourlyForecast(weatherArray, req.query.hours, req.query.day, req.query.month, req.query.year);
+          forecastJson.list.map(json => weatherArray.push(new Weather(json, 'forecast')));
 
-        if(compare.compareWeather(req.query.sport, weather)) {
-          res.send({result: "true"}, weather);
+          const weather = hourlyForecast.getHourlyForecast(weatherArray, req.query.hours, req.query.day, req.query.month, req.query.year);
+
+          if (compare.compareWeather(req.query.sport, weather)) {
+            resultArray.push({sportResult: "true", weather: weather});
+          } else {
+            resultArray.push({sportResult: "false", weather: weather});
+          }
+          
         } else {
-          res.send({result: "false"}, weather);
+          res.json(forecastJson.list);
         }
-        
-      } else {
-        res.json(forecastJson.list);
-      }
+      });
     });
   });
+
+  res.json(resultArray);
+  
 });
 
 router.get('/sports', (req, res) => {
