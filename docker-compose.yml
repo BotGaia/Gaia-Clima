@@ -2,7 +2,7 @@ version: '3'
 
 services:
   gaiaclima:
-    image: caleberios/gaia-clima:homolog
+    build: .
     restart: always
     environment:
       - API_KEY=${API_KEY}
