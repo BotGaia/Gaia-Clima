@@ -1,6 +1,7 @@
 const express = require('express');
 const requestWeather = require('../src/requests/requestWeather');
 const Weather = require('../src/models/Weather');
+const Sport = require('./models/Sport');
 const compare = require('./utils/compareSportWithWeather');
 const endpoints = require('./utils/endpoints');
 const hourlyForecast = require('./utils/hourlyForecast');
@@ -49,8 +50,6 @@ router.get('/climateForecast', (req, res) => {
         forecastJson.list.map(json => weatherArray.push(new Weather(json, 'forecast')));
 
         res.json(hourlyForecast.getHourlyForecast(weatherArray, req.query.hours, req.query.day, req.query.month, req.query.year));
-
-
       } else {
         res.json(forecastJson.list);
       }
@@ -59,34 +58,42 @@ router.get('/climateForecast', (req, res) => {
 });
 
 router.get('/sportForecast', (req, res) => {
-  
   const resultArray = new Array();
-
-  req.query.locals.forEach((local) => {
+  let i = 0;
+  req.body.locals.forEach((local) => {
     requestWeather.getLocal(local).then((coordsJson) => {
-      requestWeather.getForecast(coordsJson).then((forecastJson) => {
+      requestWeather.getForecast(coordsJson).then(async (forecastJson) => {
         if (forecastJson.cod === '200') {
           const weatherArray = [];
 
           forecastJson.list.map(json => weatherArray.push(new Weather(json, 'forecast')));
 
-          const weather = hourlyForecast.getHourlyForecast(weatherArray, req.query.hours, req.query.day, req.query.month, req.query.year);
+          const weather = hourlyForecast.getHourlyForecast(weatherArray, req.body.hours, req.body.day, req.body.month, req.body.year);
+          const sport = new Sport(req.query.sport);
+          await sport.findMe();
 
-          if (compare.compareWeather(req.query.sport, weather)) {
-            resultArray.push({sportResult: "true", weather: weather});
-          } else {
-            resultArray.push({sportResult: "false", weather: weather});
+          const recommendation = compare.compareWeather(sport.sport, weather);
+
+          if (recommendation == 3) {
+            resultArray.push({ sportResult: 'favorable', weather });
+          } else if (recommendation == 2) {
+            resultArray.push({ sportResult: 'reservation', weather });
+          } else if (recommendation == 1) {
+            resultArray.push({ sportResult: 'alert', weather });
+          } else if (recommendation == 1) {
+            resultArray.push({ sportResult: 'alert', weather });
           }
-          
+
+          i += 1;
+          if (i == req.body.locals.lenght) {
+            res.json(resultArray);
+          }
         } else {
           res.json(forecastJson.list);
         }
       });
     });
   });
-
-  res.json(resultArray);
-  
 });
 
 router.get('/sports', (req, res) => {
