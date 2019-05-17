@@ -23,7 +23,7 @@ module.exports = {
         });
       }).catch();
     } else if (process.env.ENVIRONMENT === 'homolog') {
-      mongoose.connect(`mongodb://${process.env.USER_DB}:${process.env.PASS_DB}@68.183.43.29:32756/${process.env.DB}`,
+      mongoose.connect(`mongodb://${process.env.USER_DB}:${process.env.PASS_DB}@35.222.146.138/${process.env.DB}`,
         { useNewUrlParser: true }).then(() => {
         saveSports.saveAllSports().then(() => {
           resolve();

@@ -1,12 +1,15 @@
 /* eslint-disable import/no-unresolved */
 const express = require('express');
 const bodyParser = require('body-parser');
-const mongooseConnection = require('../src/config/mongooseConnection');
+const mongooseConnection = require('./config/mongooseConnection');
+const endpoint = require('./config/endpoint');
 
 const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+endpoint.configLocal();
 
 mongooseConnection.connect();
 
