@@ -10,7 +10,6 @@ const compare = require('../utils/compareSportWithWeather');
 const Sport = require('../models/Sport');
 const Interval = require('../models/Interval');
 
-
 const fakeWeather = { temperature: 1500, humidity: 2000, windySpeed: 2000 };
 
 describe('Compare something', () => {

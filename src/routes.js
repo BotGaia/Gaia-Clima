@@ -136,5 +136,4 @@ router.get('/allSports', (req, res) => {
   });
 });
 
-
 module.exports = app => app.use('/', router);

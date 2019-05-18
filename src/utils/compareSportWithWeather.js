@@ -80,7 +80,6 @@ function compareHumidity(sport, weather) {
   return false;
 }
 
-
 function compareWindSpeed(sport, weather) {
   for (let i = 0; i < sport.windSpeed.limitArray.length; i += 1) {
     if (parseFloat(weather.windySpeed) >= parseFloat(sport.windSpeed.limitArray[i].lowerLimit)
