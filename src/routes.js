@@ -8,6 +8,8 @@ const hourlyForecast = require('./utils/hourlyForecast');
 
 const router = express.Router();
 
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+
 router.get('/', (req, res) => {
   res.json(endpoints.getJson());
 });
