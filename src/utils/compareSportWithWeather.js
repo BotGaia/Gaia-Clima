@@ -1,7 +1,6 @@
-const mongoose = require('mongoose'); const SportSchema = require('../db/sportSchema');
+const mongoose = require('mongoose'); const SportSchema = require('../schemas/sportSchema');
 
 const SportModel = mongoose.model('SportModel', SportSchema);
-
 
 module.exports = {
   compare(weather) {
@@ -47,10 +46,10 @@ module.exports = {
   },
 
   compareTemperature: (sport, weather) => {
-    for (let i = 0; i < sport.temperature.limitArray.length; i += 1) {
-      if (parseFloat(weather.temperature) >= parseFloat(sport.temperature.limitArray[i].lowerLimit)
+    for (let i = 0; i < sport.temperature.length; i += 1) {
+      if (parseFloat(weather.temperature) >= parseFloat(sport.temperature[i].lowerLimit)
       && parseFloat(weather.temperature)
-      <= parseFloat(sport.temperature.limitArray[i].upperLimit)) {
+      <= parseFloat(sport.temperature[i].upperLimit)) {
         return true;
       }
     }
@@ -58,24 +57,22 @@ module.exports = {
   },
 
   compareHumidity: (sport, weather) => {
-    for (let i = 0; i < sport.humidity.limitArray.length; i += 1) {
-      if (parseFloat(weather.humidity) >= parseFloat(sport.humidity.limitArray[i].lowerLimit)
-      && parseFloat(weather.humidity) <= parseFloat(sport.humidity.limitArray[i].upperLimit)) {
+    for (let i = 0; i < sport.humidity.length; i += 1) {
+      if (parseFloat(weather.humidity) >= parseFloat(sport.humidity[i].lowerLimit)
+      && parseFloat(weather.humidity) <= parseFloat(sport.humidity[i].upperLimit)) {
         return true;
       }
     }
     return false;
   },
-
 
   compareWindSpeed: (sport, weather) => {
-    for (let i = 0; i < sport.windSpeed.limitArray.length; i += 1) {
-      if (parseFloat(weather.windySpeed) >= parseFloat(sport.windSpeed.limitArray[i].lowerLimit)
-      && parseFloat(weather.windySpeed) <= parseFloat(sport.windSpeed.limitArray[i].upperLimit)) {
+    for (let i = 0; i < sport.windSpeed.length; i += 1) {
+      if (parseFloat(weather.windySpeed) >= parseFloat(sport.windSpeed[i].lowerLimit)
+      && parseFloat(weather.windySpeed) <= parseFloat(sport.windSpeed[i].upperLimit)) {
         return true;
       }
     }
     return false;
   },
-
 };

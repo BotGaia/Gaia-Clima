@@ -1,7 +1,7 @@
 const express = require('express');
 const requestWeather = require('../src/requests/requestWeather');
 const Weather = require('../src/models/Weather');
-const util = require('./utils/compareSportWithWeather');
+const comparation = require('./utils/compareSportWithWeather');
 const endpoints = require('./utils/endpoints');
 
 const router = express.Router();
@@ -46,7 +46,7 @@ router.get('/sports', (req, res) => {
     requestWeather.getWeather(coordsJson).then((weatherJson) => {
       if (weatherJson.cod === 200) {
         const weather = new Weather(weatherJson);
-        util.compare(weather).then((objectOfSports) => {
+        comparation.compare(weather).then((objectOfSports) => {
           res.json(objectOfSports);
         });
       } else {
@@ -57,10 +57,9 @@ router.get('/sports', (req, res) => {
 });
 
 router.get('/allSports', (req, res) => {
-  util.getAllSports().then((array) => {
+  comparation.getAllSports().then((array) => {
     res.json(array);
   });
 });
-
 
 module.exports = app => app.use('/', router);
