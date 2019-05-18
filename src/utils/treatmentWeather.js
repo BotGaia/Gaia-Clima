@@ -3,34 +3,24 @@ module.exports = {
     switch (sky) {
       case 'clear sky':
         return ('céu limpo');
-
       case 'few clouds':
         return ('poucas nuvens');
-
       case 'broken clouds':
         return ('céu parcialmente nublado');
-
       case 'scattered clouds':
         return ('nuvens dispersas');
-
       case 'moderate rain':
         return ('chuva moderada');
-
       case 'light rain':
         return ('leve chuva');
-
       case 'overcast clouds':
         return ('céu nublado');
-
       case 'light intensity':
         return ('sol forte');
-
       case 'shower rain':
         return ('chuva intensa');
-
       case 'heavy snow':
         return ('neve intensa');
-
       default:
         return ('');
     }
