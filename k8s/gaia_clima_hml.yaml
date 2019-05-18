@@ -25,8 +25,16 @@ spec:
     spec:
       containers:
       - env:
+        - name: API_KEY
+          value: ${API_KEY}
+        - name: DB
+          value: ${DB}
         - name: ENVIRONMENT
           value: homolog
+        - name: PASS_DB
+          value: ${PASS_DB}
+        - name: USER_DB
+          value: ${USER_DB}
         image: caleberios/gaia-clima:homolog
         imagePullPolicy: Always
         name: gaia-clima-hml
