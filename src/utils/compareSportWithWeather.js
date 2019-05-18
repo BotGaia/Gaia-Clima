@@ -92,4 +92,5 @@ function compareWindSpeed(sport, weather) {
 }
 
 module.exports = {
-  compare, divideArrays, getAllSports, compareWeather, compareTemperature, compareHumidity, compareWindSpeed,};
+  compare, divideArrays, getAllSports, compareWeather, compareTemperature, compareHumidity, compareWindSpeed,
+};
