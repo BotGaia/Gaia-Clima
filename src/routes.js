@@ -65,29 +65,28 @@ router.get('/sportForecast', (req, res) => {
       requestWeather.getForecast(coordsJson).then(async (forecastJson) => {
         if (forecastJson.cod === '200') {
           const weatherArray = [];
-          
+
           forecastJson.list.map(json => weatherArray.push(new Weather(json, 'forecast')));
-          
+
           const weather = hourlyForecast.getHourlyForecast(weatherArray, req.body.hours, req.body.day, req.body.month, req.body.year);
-          const sport = new Sport(req.query.sport);
+          const sport = new Sport(req.body.sport);
           await sport.findMe();
-          console.log(sport).sport.temperature;
-          
+
           const recommendation = compare.compareWeather(sport.sport, weather);
-          
-          if (recommendation == 3) {
+
+          if (recommendation === 3) {
             resultArray.push({ sportResult: 'favorable', weather });
-          } else if (recommendation == 2) {
+          } else if (recommendation === 2) {
             resultArray.push({ sportResult: 'reservation', weather });
-          } else if (recommendation == 1) {
+          } else if (recommendation === 1) {
             resultArray.push({ sportResult: 'alert', weather });
-          } else if (recommendation == 0) {
+          } else if (recommendation === 0) {
             resultArray.push({ sportResult: 'not', weather });
           }
-          
+
           i += 1;
-          
-          if (i == req.body.locals.length) {
+
+          if (i === req.body.locals.length) {
             res.json(resultArray);
           }
         } else {

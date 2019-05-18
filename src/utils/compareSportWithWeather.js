@@ -45,7 +45,7 @@ function getAllSports() {
 }
 
 function compareWeather(sport, weather) {
-  const recommendationLevel = 0;
+  let recommendationLevel = 0;
   if (this.compareHumidity(sport, weather)) {
     recommendationLevel += 1;
   }
