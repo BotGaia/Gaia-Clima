@@ -14,7 +14,6 @@ const Interval = require('../models/Interval');
 const fakeWeather = { temperature: 1500, humidity: 2000, windySpeed: 2000 };
 
 describe('Compare something', () => {
-
   it('Compare temperature', () => {
     const sport = new Sport('sportTeste');
     const interval = new Interval('3000', '1000');

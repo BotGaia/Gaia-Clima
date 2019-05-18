@@ -49,7 +49,16 @@ router.get('/climateForecast', (req, res) => {
 
         forecastJson.list.map(json => weatherArray.push(new Weather(json, 'forecast')));
 
-        res.json(hourlyForecast.getHourlyForecast(weatherArray, req.query.hours, req.query.day, req.query.month, req.query.year));
+        res.json(
+          hourlyForecast
+            .getHourlyForecast(
+              weatherArray,
+              req.query.hours,
+              req.query.day,
+              req.query.month,
+              req.query.year,
+            ),
+        );
       } else {
         res.json(forecastJson.list);
       }
@@ -57,8 +66,8 @@ router.get('/climateForecast', (req, res) => {
   });
 });
 
-router.get('/sportForecast', (req, res) => {
-  const resultArray = new Array();
+router.post('/sportForecast', (req, res) => {
+  const resultArray = [];
   let i = 0;
   req.body.locals.forEach((local) => {
     requestWeather.getLocal(local).then((coordsJson) => {
@@ -68,7 +77,14 @@ router.get('/sportForecast', (req, res) => {
 
           forecastJson.list.map(json => weatherArray.push(new Weather(json, 'forecast')));
 
-          const weather = hourlyForecast.getHourlyForecast(weatherArray, req.body.hours, req.body.day, req.body.month, req.body.year);
+          const weather = hourlyForecast
+            .getHourlyForecast(
+              weatherArray,
+              req.body.hours,
+              req.body.day,
+              req.body.month,
+              req.body.year,
+            );
           const sport = new Sport(req.body.sport);
           await sport.findMe();
 
