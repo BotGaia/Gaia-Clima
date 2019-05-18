@@ -5,12 +5,12 @@ const SportModel = mongoose.model('SportModel', SportSchema);
 function compare(weather) {
   return new Promise((resolve) => {
     this.getAllSports().then((array) => {
-      resolve(this.divideArrays(array, weather));
+      resolve(this.divideRecommendationArrays(array, weather));
     });
   });
 }
 
-function divideArrays(array, weather) {
+function divideRecommendationArrays(array, weather) {
   let count = 0;
   const objectOfSports = { favorable: [], reservation: [], alert: [] };
   for (let i = 0; i < array.length; i += 1) {
@@ -92,7 +92,7 @@ function compareWindSpeed(sport, weather) {
 
 module.exports = {
   compare,
-  divideArrays,
+  divideRecommendationArrays,
   getAllSports,
   compareWeather,
   compareTemperature,
