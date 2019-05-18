@@ -2,6 +2,7 @@ function getHoursAhead(hours, day, month, year) {
   const date = new Date();
   date.setHours(date.getHours() - 3);
 
+    console.log(date.toLocaleTimeString())
   let hoursAhead = 0;
   let fullDays;
 
@@ -42,8 +43,12 @@ function getHoursAhead(hours, day, month, year) {
   } else if (date.getFullYear() < year) {
     if (month = 0 && date.getMonth() === 11) {
       hoursAhead += (31 - date.getDate() + day) * 24;
-    }
-  }
+    } else {
+      hoursAhead = 'invalid';
+    } 
+  } else {
+    hoursAhead = 'invalid';
+  } 
 
   if (hoursAhead > (24 * 5)) {
     hoursAhead = 'invalid';
@@ -54,14 +59,13 @@ function getHoursAhead(hours, day, month, year) {
 module.exports = {
   getHourlyForecast: (weatherArray, hours, day, month, year) => {
     const hoursAhead = getHoursAhead(hours, day, month, year);
-
     if (hoursAhead === 'invalid') {
-      // invalidshit
+      return 'invalid';
     }
     const n = hoursAhead / 3;
     const forecastNumber = Math.round(n);
+    console.log('testmyshut' + weatherArray[forecastNumber])
     return weatherArray[forecastNumber];
-  },
-
-
+  }, 
+  getHoursAhead,
 };
