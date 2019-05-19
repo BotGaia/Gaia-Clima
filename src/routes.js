@@ -1,7 +1,7 @@
 const express = require('express');
 const requestWeather = require('../src/requests/requestWeather');
 const Weather = require('../src/models/Weather');
-const Sport = require('./models/Sport');
+const sportForecastRecommendation = require('./utils/sportForecastRecommendation');
 const compare = require('./utils/compareSportWithWeather');
 const endpoints = require('./utils/endpoints');
 const hourlyForecast = require('./utils/hourlyForecast');
@@ -79,28 +79,9 @@ router.post('/sportForecast', (req, res) => {
 
           forecastJson.list.map(json => weatherArray.push(new Weather(json, 'forecast')));
 
-          const weather = hourlyForecast
-            .getHourlyForecast(
-              weatherArray,
-              req.body.hours,
-              req.body.day,
-              req.body.month,
-              req.body.year,
-            );
-          const sport = new Sport(req.body.sport);
-          await sport.findMe();
-
-          const recommendation = compare.compareWeather(sport.sport, weather);
-
-          if (recommendation === 3) {
-            resultArray.push({ sportResult: 'favorable', weather });
-          } else if (recommendation === 2) {
-            resultArray.push({ sportResult: 'reservation', weather });
-          } else if (recommendation === 1) {
-            resultArray.push({ sportResult: 'alert', weather });
-          } else if (recommendation === 0) {
-            resultArray.push({ sportResult: 'not', weather });
-          }
+          const resultItem = await sportForecastRecommendation.getForecastRecommendation(weatherArray, req.body);
+          
+          resultArray.push(resultItem);
 
           i += 1;
 
