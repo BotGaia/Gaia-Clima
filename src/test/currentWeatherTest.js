@@ -8,7 +8,6 @@ const requestWeather = require('../requests/requestWeather');
 const Weather = require('../models/Weather');
 
 const should = chai.should();
-
 chai.use(chaiHttp);
 
 describe('GET WEATHER', () => {

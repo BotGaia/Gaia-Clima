@@ -1,11 +1,12 @@
-const mongoose = require('mongoose'); const SportSchema = require('../db/sportSchema');
+const mongoose = require('mongoose'); const SportSchema = require('../schemas/sportSchema');
 
 const SportModel = mongoose.model('SportModel', SportSchema);
+
 
 function compare(weather) {
   return new Promise((resolve) => {
     this.getAllSports().then((array) => {
-      resolve(this.divideRecommendationArrays(array, weather));
+      resolve(this.divideArrays(array, weather));
     });
   });
 }
@@ -60,7 +61,7 @@ function compareWeather(sport, weather) {
 }
 
 function compareTemperature(sport, weather) {
-  for (let i = 0; i < sport.temperature.limitArray.length; i += 1) {
+  for (let i = 0; i < sport.temperature.length; i += 1) {
     if (parseFloat(weather.temperature) >= parseFloat(sport.temperature.limitArray[i].lowerLimit)
       && parseFloat(weather.temperature)
       <= parseFloat(sport.temperature.limitArray[i].upperLimit)) {
@@ -71,7 +72,7 @@ function compareTemperature(sport, weather) {
 }
 
 function compareHumidity(sport, weather) {
-  for (let i = 0; i < sport.humidity.limitArray.length; i += 1) {
+  for (let i = 0; i < sport.humidity.length; i += 1) {
     if (parseFloat(weather.humidity) >= parseFloat(sport.humidity.limitArray[i].lowerLimit)
       && parseFloat(weather.humidity) <= parseFloat(sport.humidity.limitArray[i].upperLimit)) {
       return true;
@@ -81,7 +82,7 @@ function compareHumidity(sport, weather) {
 }
 
 function compareWindSpeed(sport, weather) {
-  for (let i = 0; i < sport.windSpeed.limitArray.length; i += 1) {
+  for (let i = 0; i < sport.windSpeed.length; i += 1) {
     if (parseFloat(weather.windySpeed) >= parseFloat(sport.windSpeed.limitArray[i].lowerLimit)
       && parseFloat(weather.windySpeed) <= parseFloat(sport.windSpeed.limitArray[i].upperLimit)) {
       return true;
