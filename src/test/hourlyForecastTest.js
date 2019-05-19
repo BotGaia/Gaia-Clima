@@ -6,11 +6,12 @@ const hourly = require('../utils/hourlyForecast');
 
 describe('Hourly Forecast', () => {
   it('Should return 1st item', () => {
-    const date = new Date();
+    const date = new Date(Date.now());
+
     date.setHours(date.getHours() - 3);
 
     hourly.getHourlyForecast(
-      [1, 1],
+      [1, 2, 3, 4, 5, 6, 7],
       date.getHours() + 1,
       date.getDate(),
       date.getMonth(),
@@ -22,21 +23,15 @@ describe('Hourly Forecast', () => {
 
   it('Should rerutn 3 hours', () => {
     const date = new Date();
-    // date.setHours(date.getHours());
 
-    let result = 0;
-    const hours = hourly.getHoursAhead(
+    hourly.getHoursAhead(
       date.getHours(),
       date.getDate(),
       date.getMonth(),
       date.getFullYear(),
-    );
-    if (hours >= 3) {
-      result = 1;
-    }
-    result
+    )
       .should
-      .eql(1);
+      .eql(3);
   });
 
 
