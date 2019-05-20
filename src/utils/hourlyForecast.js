@@ -9,7 +9,7 @@ function getHoursAhead(hours, day, month, year) {
   if (hoursAhead > 120 || hoursAhead <= 0) {
     return 'invalid';
   }
-  return Math.round(hoursAhead);
+  return Math.ceil(hoursAhead);
 }
 
 module.exports = {
