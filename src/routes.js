@@ -79,8 +79,9 @@ router.post('/sportForecast', (req, res) => {
 
           forecastJson.list.map(json => weatherArray.push(new Weather(json, 'forecast')));
 
-          const resultItem = await sportForecastRecommendation.getForecastRecommendation(weatherArray, req.body);
-          
+          const resultItem = await sportForecastRecommendation
+            .getForecastRecommendation(weatherArray, req.body);
+
           resultArray.push(resultItem);
 
           i += 1;

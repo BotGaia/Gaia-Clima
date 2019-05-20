@@ -1,4 +1,9 @@
+const hourlyForecast = require('./hourlyForecast');
+const Sport = require('../models/Sport');
+const compare = require('./compareSportWithWeather');
+
 async function getForecastRecommendation(weatherArray, body) {
+  let result;
   const weather = hourlyForecast
     .getHourlyForecast(
       weatherArray,
@@ -7,20 +12,22 @@ async function getForecastRecommendation(weatherArray, body) {
       body.month,
       body.year,
     );
-  const sport = new Sport(req.body.sport);
+  const sport = new Sport(body.sport);
   await sport.findMe();
 
   const recommendation = compare.compareWeather(sport.sport, weather);
 
   if (recommendation === 3) {
-    return { sportResult: 'favorable', weather };
+    result = { sportResult: 'favorable', weather };
   } if (recommendation === 2) {
-    return { sportResult: 'reservation', weather };
+    result = { sportResult: 'reservation', weather };
   } if (recommendation === 1) {
-    return { sportResult: 'alert', weather };
+    result = { sportResult: 'alert', weather };
   } if (recommendation === 0) {
-    return { sportResult: 'not', weather };
+    result = { sportResult: 'not', weather };
   }
+
+  return result;
 }
 
 module.exports = getForecastRecommendation;
