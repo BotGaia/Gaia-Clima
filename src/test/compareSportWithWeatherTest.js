@@ -7,7 +7,7 @@ const compare = require('../utils/compareSportWithWeather');
 const Sport = require('../models/Sport');
 const Interval = require('../models/Interval');
 
-const fakeWeather = { temperature: 1500, humidity: 2.0, windyspeed: 2.0 };
+const fakeWeather = { temperature: 1500, humidity: 2000, windySpeed: 2000 };
 const should = chai.should();
 
 describe('Compare current and favorable weather conditions', () => {
@@ -22,7 +22,7 @@ describe('Compare current and favorable weather conditions', () => {
   it('Compare humidity', () => {
     const sport = new Sport('sportTeste');
     const interval = new Interval('3000', '1000');
-    sport.appendHumidityLimitAray(interval);
+    sport.appendHumidityInterval(interval);
     const tof = compare.compareHumidity(sport.getSport(), fakeWeather);
     tof.should.be.equal(true);
   });
@@ -30,7 +30,7 @@ describe('Compare current and favorable weather conditions', () => {
   it('Compare wind speed', () => {
     const sport = new Sport('sportTeste');
     const interval = new Interval('3000', '1000');
-    sport.appendwindSpeedLimitAray(interval);
+    sport.appendwindSpeedInterval(interval);
     const tof = compare.compareWindSpeed(sport.getSport(), fakeWeather);
     tof.should.be.equal(true);
   });
