@@ -32,20 +32,8 @@ module.exports = {
             type: 'string',
           },
           {
-            name: 'day',
-            type: 'integer',
-          },
-          {
-            name: 'month',
-            type: 'integer',
-          },
-          {
-            name: 'year',
-            type: 'integer',
-          },
-          {
-            name: 'hours',
-            type: 'integer',
+            name: 'date',
+            type: 'string',
           },
         ],
         description: 'Receives a location and a date and returns the weather conditions for that date and place',
@@ -55,10 +43,7 @@ module.exports = {
         endpoint: '/sportForecast',
         JSON: {
           telegramId: 'string',
-          day: 'integer',
-          hours: 'integer',
-          year: 'integer',
-          month: 'integer',
+          day: 'string',
           sport: 'string',
           locals: 'array',
         },
