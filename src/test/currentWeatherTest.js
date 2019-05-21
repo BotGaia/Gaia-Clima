@@ -15,6 +15,7 @@ describe('GET WEATHER', () => {
     const getLocalResponse = JSON.parse('{"lat":"-10.3333333","lng":"-53.2"}');
 
     requestWeather.getWeather(getLocalResponse).then((weatherJson) => {
+      console.log(weatherJson)
       weatherJson.should.be.a('Object');
       weatherJson.should.have.property('cod').eql(200);
       done();
@@ -25,6 +26,7 @@ describe('GET WEATHER', () => {
     const getLocalResponse = JSON.parse('{}');
 
     requestWeather.getWeather(getLocalResponse).then((weatherJson) => {
+      console.log(weatherJson)
       weatherJson.should.be.a('Object');
       weatherJson.should.have.property('cod').eql('400');
       done();
@@ -35,6 +37,7 @@ describe('GET WEATHER', () => {
     const getLocalResponse = JSON.parse('{"lat":"error","lng":"error"}');
 
     requestWeather.getWeather(getLocalResponse).then((weatherJson) => {
+      console.log(weatherJson)
       weatherJson.should.be.a('Object');
       weatherJson.should.have.property('cod').eql('400');
       done();
@@ -48,6 +51,7 @@ describe('GET WEATHER', () => {
     };
 
     requestWeather.getWeather(getLocalResponse).then((weatherJson) => {
+      console.log(weatherJson)
       const weather = new Weather(weatherJson, 'weather');
 
       weather.should.be.a('Object');
