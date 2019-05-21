@@ -54,7 +54,7 @@ router.get('/climateForecast', (req, res) => {
           hourlyForecast
             .getHourlyForecast(
               weatherArray,
-              new Date(req.query.year, req.query.month, req.query.day, req.query.hours)
+              new Date(req.query.date)
             ),
         );
       } else {
