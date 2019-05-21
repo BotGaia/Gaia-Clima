@@ -30,4 +30,4 @@ async function getForecastRecommendation(weatherArray, body) {
   return result;
 }
 
-module.exports = getForecastRecommendation;
+module.exports = {getForecastRecommendation};
