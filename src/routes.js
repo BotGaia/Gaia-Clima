@@ -48,17 +48,13 @@ router.get('/climateForecast', (req, res) => {
     requestWeather.getForecast(coordsJson).then((forecastJson) => {
       if (forecastJson.cod === '200') {
         const weatherArray = [];
-
+        
         forecastJson.list.map(json => weatherArray.push(new Weather(json, 'forecast')));
-
         res.json(
           hourlyForecast
             .getHourlyForecast(
               weatherArray,
-              req.query.hours,
-              req.query.day,
-              req.query.month,
-              req.query.year,
+              new Date(req.query.year, req.query.month, req.query.day, req.query.hours)
             ),
         );
       } else {
