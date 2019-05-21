@@ -48,13 +48,13 @@ router.get('/climateForecast', (req, res) => {
     requestWeather.getForecast(coordsJson).then((forecastJson) => {
       if (forecastJson.cod === '200') {
         const weatherArray = [];
-        
+
         forecastJson.list.map(json => weatherArray.push(new Weather(json, 'forecast')));
         res.json(
           hourlyForecast
             .getHourlyForecast(
               weatherArray,
-              new Date(req.query.date)
+              new Date(req.query.date),
             ),
         );
       } else {
@@ -72,12 +72,12 @@ router.post('/sportForecast', (req, res) => {
       requestWeather.getForecast(coordsJson).then(async (forecastJson) => {
         if (forecastJson.cod === '200') {
           const weatherArray = [];
-          
+
           forecastJson.list.map(json => weatherArray.push(new Weather(json, 'forecast')));
-          
+
           const resultItem = await sportForecastRecommendation
-          .getForecastRecommendation(weatherArray, req.body);
-          
+            .getForecastRecommendation(weatherArray, req.body);
+
           resultArray.push(resultItem);
           i += 1;
 
