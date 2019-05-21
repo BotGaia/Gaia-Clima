@@ -1,8 +1,6 @@
-function getHoursAhead(hours, day, month, year) {
+function getHoursAhead(dateAhead) {
   const today = new Date();
   today.setHours(today.getHours() - 3);
-
-  const dateAhead = new Date(year, month, day, hours);
 
   const hoursAhead = (dateAhead.getTime() - today.getTime()) / (60 * 60 * 1000);
 
@@ -13,8 +11,8 @@ function getHoursAhead(hours, day, month, year) {
 }
 
 module.exports = {
-  getHourlyForecast: (weatherArray, hours, day, month, year) => {
-    const hoursAhead = getHoursAhead(hours, day, month, year);
+  getHourlyForecast: (weatherArray, date) => {
+    const hoursAhead = getHoursAhead(date);
 
     if (hoursAhead === 'invalid') {
       return 'invalid';
