@@ -59,7 +59,7 @@ module.exports = {
           hours: 'integer',
           year: 'integer',
           month: 'integer',
-          sport: 'array',
+          sport: 'string',
           locals: 'array',
         },
         description: 'Receives a notification object and a date and returns the favorability of the sport and a weather object for each location.',
