@@ -44,11 +44,12 @@ router.get('/forecast', (req, res) => {
 });
 
 router.get('/climateForecast', (req, res) => {
+  console.log(req.query)
   requestWeather.getLocal(req.query.place).then((coordsJson) => {
     requestWeather.getForecast(coordsJson).then((forecastJson) => {
       if (forecastJson.cod === '200') {
         const weatherArray = [];
-
+        
         forecastJson.list.map(json => weatherArray.push(new Weather(json, 'forecast')));
         res.json(
           hourlyForecast

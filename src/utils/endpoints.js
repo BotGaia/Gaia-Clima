@@ -43,7 +43,7 @@ module.exports = {
         endpoint: '/sportForecast',
         JSON: {
           telegramId: 'string',
-          day: 'string',
+          date: 'string',
           sport: 'string',
           locals: 'array',
         },
