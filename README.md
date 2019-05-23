@@ -62,3 +62,5 @@ Aqui se encontra todos os endpoints desse serviço. Todos os endpoints se encont
 |GET|/forecast|place: String|Recebe um local e retorna quarenta previsões das condições climáticas do mesmo do período de cinco dias.|
 |GET|/sports|place: String|Recebe um local e retorna os esportes favoraveis, com ressalva e com alerta.|
 |GET|/allSports|-|Recebe todos os esportes presentes no banco de dados.|
+|GET|/climateForecast|place: String, date: String| Recebe um local e uma data e retorna as previsões das condições climáticas para aquela data e local.|
+|POST|/sportForecast|telegramId: String, date: String, sport: String,  locals: Array|Recebe um objeto de notificação e retorna a favorabilidade do esporte e um objeto de clima para cada local|

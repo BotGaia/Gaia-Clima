@@ -2,7 +2,9 @@ const express = require('express');
 const requestWeather = require('../src/requests/requestWeather');
 const Weather = require('../src/models/Weather');
 const comparation = require('./utils/compareSportWithWeather');
+const sportForecastRecommendation = require('./utils/sportForecastRecommendation');
 const endpoints = require('./utils/endpoints');
+const hourlyForecast = require('./utils/hourlyForecast');
 
 const router = express.Router();
 
@@ -37,6 +39,55 @@ router.get('/forecast', (req, res) => {
       } else {
         res.json(forecastJson.list);
       }
+    });
+  });
+});
+
+router.get('/climateForecast', (req, res) => {
+  requestWeather.getLocal(req.query.place).then((coordsJson) => {
+    requestWeather.getForecast(coordsJson).then((forecastJson) => {
+      if (forecastJson.cod === '200') {
+        const weatherArray = [];
+
+        forecastJson.list.map(json => weatherArray.push(new Weather(json, 'forecast')));
+        res.json(
+          hourlyForecast
+            .getHourlyForecast(
+              weatherArray,
+              new Date(req.query.date),
+            ),
+        );
+      } else {
+        res.json(forecastJson.list);
+      }
+    });
+  });
+});
+
+router.post('/sportForecast', (req, res) => {
+  const resultArray = [];
+  let i = 0;
+  req.body.locals.forEach((local) => {
+    requestWeather.getLocal(local).then((coordsJson) => {
+      requestWeather.getForecast(coordsJson).then(async (forecastJson) => {
+        if (forecastJson.cod === '200') {
+          const weatherArray = [];
+
+          forecastJson.list.map(json => weatherArray.push(new Weather(json, 'forecast')));
+
+          const resultItem = await sportForecastRecommendation
+            .getForecastRecommendation(weatherArray, req.body);
+
+          resultArray.push(resultItem);
+          i += 1;
+
+          if (i === req.body.locals.length) {
+            res.json(resultArray);
+          }
+        } else {
+          res.json(forecastJson.list);
+        }
+      });
     });
   });
 });
