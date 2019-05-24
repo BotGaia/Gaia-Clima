@@ -9,35 +9,36 @@ variables:
 
 stages:
   - build
-  - test
   - quality
   - pushImage
   - deploy
 
+installDependencies:
+  stage: build
+  image: node:alpine
+  script:
+    - npm install
+
 buildLocal:
   stage: build
-  before_script:
-    - apk add --no-cache py-pip python-dev libffi-dev openssl-dev gcc libc-dev make
-    - pip install docker-compose
   script:
-    - docker-compose build
+    - docker build .
 
 testCheck:
-  stage: test
-  before_script:
-    - apk add --no-cache py-pip python-dev libffi-dev openssl-dev gcc libc-dev make
-    - pip install docker-compose
-  script:
-    - docker-compose run gaiaclima /bin/sh -c "cd /app; npm i; npm run test"
-  coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
-
-staticAnalysis:
   stage: quality
   before_script:
     - apk add --no-cache py-pip python-dev libffi-dev openssl-dev gcc libc-dev make
     - pip install docker-compose
   script:
-    - docker-compose run gaiaclima /bin/sh -c "cd /app; npm i; npm run lint"
+    - docker-compose run gaiaclima npm run test
+  coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
+
+staticAnalysis:
+  stage: quality
+  image: node:alpine
+  script:
+    - npm install
+    - npm run lint
 
 pushHomolog:
   stage: pushImage
@@ -66,8 +67,7 @@ deployHomolog:
     - source /root/.bashrc
     - gcloud auth activate-service-account --key-file ${SERVICE_ACCOUNT} --project=${GKE_PROJECT}
     - gcloud container clusters get-credentials gaia-cluster --zone us-central1-a --project gaia-240100
-    - kubectl delete svc gaia-clima-hml
-    - kubectl delete deployments gaia-clima-hml
+    - kubectl delete deployment.apps/gaia-clima-hml service/gaia-clima-hml
     - cat k8s/gaia_clima_hml.yaml | sed "s/{{API_KEY}}/$API_KEY/g" | sed "s/{{DB}}/$DB/g" | sed "s/{{PASS_DB}}/$PASS_DB/g" | sed "s/{{USER_DB}}/$USER_DB/g" | kubectl apply -f -
 
 deployProd:
@@ -79,6 +79,5 @@ deployProd:
     - source /root/.bashrc
     - gcloud auth activate-service-account --key-file ${SERVICE_ACCOUNT} --project=${GKE_PROJECT}
     - gcloud container clusters get-credentials gaia-cluster --zone us-central1-a --project gaia-240100
-    - kubectl delete svc gaia-clima
-    - kubectl delete deployments gaia-clima
+        - kubectl delete deployment.apps/gaia-clima service/gaia-clima
     - cat k8s/gaia_clima.yaml | sed "s/{{API_KEY}}/$API_KEY/g" | sed "s/{{DB}}/$DB/g" | sed "s/{{PASS_DB}}/$PASS_DB/g" | sed "s/{{USER_DB}}/$USER_DB/g" | kubectl apply -f -
