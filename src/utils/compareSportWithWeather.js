@@ -6,7 +6,7 @@ const SportModel = mongoose.model('SportModel', SportSchema);
 function compare(weather) {
   return new Promise((resolve) => {
     this.getAllSports().then((array) => {
-      resolve(this.divideArrays(array, weather));
+      resolve(this.divideRecommendationArrays(array, weather));
     });
   });
 }
