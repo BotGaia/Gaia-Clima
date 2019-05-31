@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:alpine
 RUN mkdir /app
 WORKDIR /app
 ENV ENVIRONMENT=dev

@@ -1,55 +1,49 @@
-const https = require('https');
-const http = require('http');
-
-const targetIp = process.env.IP_ADDRESS;
+const axios = require('axios');
 
 module.exports = {
-  getLocal: (target) => {
-    let localData = '';
-    let localJsonData = '';
-    let URL = '';
+  getLocal: target => new Promise((resolve) => {
+    axios.get(`${global.URL_LOCAL}/local`, {
+      params: {
+        address: target,
+      },
+    }).then((response) => {
+      resolve(response.data);
+    }).catch((err) => {
+      resolve(err);
+    });
+  }),
 
-    if (process.env.ENVIRONMENT === 'dev') {
-      URL = `http://${targetIp}:3001/local?address=${target}`;
-    } else if (process.env.ENVIRONMENT === 'homolog') {
-      URL = `http://68.183.43.29:31170/local?address=${target}`;
-    }
+  getWeather: (localJson) => {
+    const params = {
+      lat: localJson.lat,
+      lon: localJson.lng,
+      appid: process.env.API_KEY,
+    };
 
     return new Promise((resolve) => {
-      http.get(URL, (resp) => {
-        resp.on('data', (chunk) => {
-          localData += chunk;
+      axios.get('https://api.openweathermap.org/data/2.5/weather', { params })
+        .then((response) => {
+          resolve(response.data);
+        }).catch((err) => {
+          resolve(err.response.data);
         });
-
-        resp.on('end', () => {
-          localJsonData = JSON.parse(localData);
-          resolve(localJsonData);
-        });
-      }).on('error', () => {
-        const errorJson = JSON.parse('{"lat":"error","lng":"error"}');
-        resolve(errorJson);
-      });
     });
   },
 
-  getWeather: (localJson) => {
-    const { lat } = localJson;
-    const { lng } = localJson;
-    let data = '';
-    let JsonData = '';
-    const apiKey = process.env.API_KEY;
+  getForecast: (localJson) => {
+    const params = {
+      lat: localJson.lat,
+      lon: localJson.lng,
+      appid: process.env.API_KEY,
+    };
 
     return new Promise((resolve) => {
-      https.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&appid=${apiKey}`, (resp) => {
-        resp.on('data', (chunk) => {
-          data += chunk;
+      axios.get('https://api.openweathermap.org/data/2.5/forecast', { params })
+        .then((response) => {
+          resolve(response.data);
+        }).catch((err) => {
+          resolve(err.response.data);
         });
-
-        resp.on('end', () => {
-          JsonData = JSON.parse(data);
-          resolve(JsonData);
-        });
-      });
     });
   },
 };

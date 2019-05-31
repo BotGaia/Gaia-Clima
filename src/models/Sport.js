@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const SportSchema = require('../db/sportSchema');
+const SportSchema = require('../schemas/sportSchema');
 
 const SportModel = mongoose.model('SportModel', SportSchema);
 
@@ -8,28 +8,22 @@ module.exports = class Sport {
     this.sport = new SportModel({
       name,
       class: 'sport',
-      temperature: {
-        limitArray: [],
-      },
-      humidity: {
-        limitArray: [],
-      },
-      windSpeed: {
-        limitArray: [],
-      },
+      temperature: [],
+      humidity: [],
+      windSpeed: [],
     });
   }
 
-  appendTemperatureLimitAray(interval) {
-    this.sport.temperature.limitArray.push(interval);
+  appendTemperatureInterval(interval) {
+    this.sport.temperature.push(interval);
   }
 
-  appendHumidityLimitAray(interval) {
-    this.sport.humidity.limitArray.push(interval);
+  appendHumidityInterval(interval) {
+    this.sport.humidity.push(interval);
   }
 
-  appendwindSpeedLimitAray(interval) {
-    this.sport.windSpeed.limitArray.push(interval);
+  appendwindSpeedInterval(interval) {
+    this.sport.windSpeed.push(interval);
   }
 
   getSport() {
